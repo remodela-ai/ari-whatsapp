@@ -1,0 +1,42 @@
+{
+  "name": "aria-bot",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node ./node_modules/tsx/dist/cli.cjs ./src/index.ts",
+    "build": "node ./node_modules/rollup/dist/bin/rollup -c",
+    "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "dependencies": {
+    "@bot-whatsapp/bot": "latest",
+    "@bot-whatsapp/cli": "latest",
+    "@bot-whatsapp/database": "latest",
+    "@bot-whatsapp/portal": "latest",
+    "@bot-whatsapp/provider": "latest",
+    "@bytescale/sdk": "^3.34.0",
+    "@whiskeysockets/baileys": "6.5.0",
+    "axios": "^1.6.8",
+    "cache-manager": "5.2.4",
+    "dayjs": "^1.11.10",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.3",
+    "openai": "^4.29.1",
+    "wa-sticker-formatter": "4.4.4"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.28",
+    "eslint": "^8.52.0",
+    "eslint-plugin-bot-whatsapp": "latest",
+    "rollup": "^4.13.0",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "tsx": "^4.7.1"
+  },
+  "author": "aportillo",
+  "license": "ISC"
+}

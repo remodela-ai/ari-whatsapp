@@ -128,3 +128,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+src/aria-bot/bot.qr.png
+src/aria-bot/.vscode/launch.json
+src/aria-bot/bot_sessions
