@@ -10,4 +10,10 @@ export const CONFIG = {
   MEETCODY_URL: process.env.MEETCODY_URL,
   MEETCODY_KEY: process.env.MEETCODY_KEY,
   MEETCODY_CONVERSATION_ID: process.env.MEETCODY_CONVERSATION_ID,
+
+  GOOGLE_SHEET: {
+    SERVICE_ACCOUNT_EMAIL: process.env.SERVICE_ACCOUNT_EMAIL,
+    PRIVATE_KEY: process.env.PRIVATE_KEY,
+    SHEET_ID: process.env.SHEET_ID,
+  },
 };

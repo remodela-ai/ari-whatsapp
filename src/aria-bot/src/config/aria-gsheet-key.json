@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "remodel-ai",
+  "private_key_id": "7ea20bfb0816aeba904280ea37ca43a18c274760",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDFhAjac26vAHW7\nFpEPKFPqcv6POa7kyAN7zlKmiyVZeegYSJ3f32ygurUsgrTIWWzCMfS66KQOYes/\nuGEGW64/XNqsVAiQNQ3pnm8ZpGU7jE2D6UvpRb1VAKIYZL84S+TGfHGXowJIxKhj\n45AQTj94txW/lsD5YofryjxuY56qwvJcQ2LEmc4ed90sHDwTMrngpOZDnX1fV1UC\nRnIHpwaSdg+IV/7SLTQyCM4c4rBDkC0PEeBNeKfQretwr0A6poKuiL6e9OCsoDNU\nLfqppqTUuel4wCls3HashgRBXlRnEXApIBClUK3KLxasHY2RyI5k9Mn1B6SgnlJ5\n8ztxWDNTAgMBAAECggEADM16JW7GBeHpv66+yFS8272IcpAynfG5CBVflhv+18Xn\nHWvXj+NTjzeK9s+iGDpzqkLCsjrSJ3yBWygAYgEfUkwagIER7QcDV9lFKkxVo358\np8g/e2dh1lisKRierG9+7L60Pjf6tezJXXAqrmPkCVcUuc5zw7Z3SPla4Wzjo/3R\np7CbE+yvA1Ef9k2aJw4kucQUnHecXUUYjFFF910/8CwVPMSbn5N8IBWVQC+KfSRt\nnTQ/URloPfFqP0NXZUPH777HgDs9O3RVetn9MYqm8ARoqjIBMn74zAKdXkYti7jv\n/vDRKvns8MjJT89pc4w9097PMKI9Em1pA806oL9YwQKBgQD0OcGFysSmhfhEDhtm\nZuDyyrIkkAGkA0/q2ODK+2BXR1YP6eXmzssZz//U4AM+3vOlPbNz1UGJWCK/gGHh\nt6BJRVpF1TdvyPI3tni669TvgAkejcZb7bkmQjxaDLIyqcrHbjJMf4BhYOElhhGr\nOh7EaOhJwjEa3SVDINrNedLgXQKBgQDPCciRAwHQVXoY6R43Qrg9NTyd/hTO8Omn\nyVj65YN4+HEmIuodi9+1456WijQiC3yLk4vznr2L8uZHYMdsdNoJ85/QHAP7VVzu\npe+U3K73s3bmAAcY6qNbUvDfqpNQY7HyBKR6o3UvUkzZ+K8+Pzb20GEq5hi5sXw6\nLsaQzPnnbwKBgHsBW+b26XS1pQUh1csNpd6jGHYx0aG5yVaPRSj20t8insYFGDXX\nkZO+nyuoZ/oScMSY/vkoP4ndSiMJlkMJKUG+HGlvqiwzGUvWK5h5jxXRdsZcwbsr\nUEVktuDj5ByASBGJ/utojFB/auZrUBrdewGRlO0RUYomN85HjexPn1ZBAoGANYpe\nJ8ITUgEI1jBS9A94/bsqteDjGLEMe6uCKz/3Q+1btXUJ/iIR9EOs21laKgO2bZH2\ne0Xt1qc2DfdlGxMM38304iicjv6ATebzkheP19a9RLV1IGhtXkyQpgbCmeNuPRwe\nPOjQgTBTV3sMNpi6ahFxT1q5wiu36IP4LbIUXlkCgYB1L26ni4ssTINGO6GvPhfM\ne8ZoHL7XirG+jPvEhMSei6Ug0JHcaLD798iPDqWJZuVfehnh5Z1n9i9QizAXadtb\n6UzDkuSdHWRdL5QlgJNsz9nP91RzBRheWKgPg66ykXueSimrCBsKZof/+afalPWQ\n8UV+TXOQ0CTTbqCNIvbWOQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "aria-consumer-gsheet@remodel-ai.iam.gserviceaccount.com",
+  "client_id": "110294060609293137454",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/aria-consumer-gsheet%40remodel-ai.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

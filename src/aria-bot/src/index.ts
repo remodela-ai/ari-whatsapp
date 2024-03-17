@@ -4,6 +4,7 @@ import database from "./database";
 import provider from "./provider";
 import flow from "./flow";
 import { initServer } from "./services/http";
+import { loadInfo } from "./services/google-sheet";
 
 /**
  * Funcion principal del bot
