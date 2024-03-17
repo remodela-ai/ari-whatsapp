@@ -5,7 +5,7 @@ import { dayjsCustom } from "src/utils/dayjs";
 import { roomStyle, roomType } from "./remodela.entities";
 import { remodelImageAsync } from "src/services/replicate";
 
-export default BotWhatsapp.addKeyword(["1", "remodelar", "remodel"])
+export default BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
   .addAnswer(
     "Necesito que me pases la imágen/foto de la habitación que quieres remodelar.",
     { capture: true },

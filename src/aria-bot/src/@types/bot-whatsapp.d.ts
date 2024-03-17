@@ -132,6 +132,5 @@ declare module "@bot-whatsapp/bot" {
     EVENTS,
     IMethodsChain,
     ActionPropertiesGeneric,
-    BotContext,
   };
 }
