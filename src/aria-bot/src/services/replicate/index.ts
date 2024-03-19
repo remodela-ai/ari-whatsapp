@@ -5,15 +5,17 @@ import { remodelaPrompt } from "src/flow/remodela.entities";
 
 const buildRemodelPrompt = (params: IRemodelaParams) => {
   return remodelaPrompt
-    .replace("[room]", params.room)
-    .replace("[style]", params.style)
-    .replace(
-      "[colors]",
-      params.colors.length > 0 ? params.colors.join(",") : "improvisa"
-    )
+    .replace("[ROOM]", params.room)
+    .replace("[STYLE]", params.style)
+    .replace("[COLORS]", params.colors)
     .replace("[extraPrompt]", params.extraPrompt || "Sin extra prompt");
 };
 
+/**
+ * Model: alaradirik/t2i-adapter-sdxl-depth-midas
+ * @param params
+ * @returns
+ */
 export const remodelImageAsync = async (
   params: IRemodelaParams
 ): Promise<string> => {
@@ -21,15 +23,18 @@ export const remodelImageAsync = async (
     "https://api.replicate.com/v1/predictions",
     {
       version:
-        "854e8727697a057c525cdb45ab037f64ecca770a1769cc52287c2e56472a247b",
+        "8a89b0ab59a050244a751b6475d91041a8582ba33692ae6fab65e0c51b700328",
       input: {
         image: params.fileUrl,
         prompt: buildRemodelPrompt(params),
-        scale: 9,
-        a_prompt:
-          "best quality, photo from Pinterest, interior, cinematic photo, ultra-detailed, ultra-realistic, award-winning, interior design, natural lighting",
-        n_prompt:
-          "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality",
+        scheduler: "K_EULER_ANCESTRAL",
+        num_samples: 1,
+        guidance_scale: 7.5,
+        negative_prompt:
+          "anime, cartoon, graphic, text, painting, crayon, graphite, abstract, glitch, deformed, mutated, ugly, disfigured",
+        num_inference_steps: 30,
+        adapter_conditioning_scale: 1,
+        adapter_conditioning_factor: 1,
       },
     },
     {

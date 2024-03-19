@@ -8,6 +8,7 @@ declare module "@bot-whatsapp/bot" {
     body: string;
     from: string;
     message: any;
+    key: any;
   };
 
   // Definiciones de tipos para el estado del bot
@@ -25,6 +26,7 @@ declare module "@bot-whatsapp/bot" {
     delay?: number;
     regex?: boolean;
     sensitive?: boolean;
+    buttons?: Array<any>;
   };
 
   type ActionPropertiesGeneric = Omit<
@@ -47,6 +49,7 @@ declare module "@bot-whatsapp/bot" {
     fallBack: (message?: string) => void;
     state: BotState;
     extensions: any;
+    provider: any;
   };
 
   // Función de devolución de llamada del bot

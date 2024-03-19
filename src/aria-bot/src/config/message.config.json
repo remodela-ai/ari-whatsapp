@@ -1,0 +1,24 @@
+{
+  "welcome": "👋 ¡Hola! [name]. Soy *Aria*, la Arquitecta Inteligente de *AQUÍ TU REMODELACIÓN*. Estoy aquí para ayudarte en todos tus proyectos de remodelación, construcción y/o decoración. 😊✨",
+  "nota": "¡Un recordatorio importante! 🌟 Aunque la IA es increíble, no puede reemplazar la experiencia y opinión de un profesional. En nuestra red, contamos con los mejores arquitectos dispuestos a brindarte los mejores servicios. No dudes en agendar una cita con algunos de nuestros Arquitectos Calificados para obtener el asesoramiento y la atención personalizada que tu proyecto merece. ¡Estamos aquí para hacer realidad tus sueños arquitectónicos!",
+  "askName": "😊 Antes de continuar, ¿podrías decirme tu nombre y apellido, por favor? Así puedo dirigirme a ti de manera más personalizada. ¡Gracias!",
+  "askCity": "¿Podrías contarme en qué parte de la hermosa Ciudad de México te encuentras? ¡Y no olvides decirme tu colonia! Así podremos conectar contigo a los arquitectos más adecuados para tu proyecto, justo donde estás. Tu información es súper importante para ofrecerte la mejor experiencia posible. ¡Gracias por compartir estos detalles con nosotros! 🏙️🏠✨",
+  "menu": {
+    "text": "¡Bienvenido/a a AQUÍ TU REMODELACIÓN! 🏡✨ Estamos aquí para hacer realidad tus proyectos de remodelación y decoración. ¿En qué podemos ayudarte hoy?",
+    "btns": [
+      "Remodelar un espacio 🛠️",
+      "Ideas de decoración 💡",
+      "Preguntas frecuentes 📋"
+    ]
+  },
+  "remodelFlow": {
+    "askImage": "¿Podrías compartirme una foto del espacio que deseas remodelar? Esto nos ayudará a entender mejor tu proyecto y brindarte recomendaciones más precisas.",
+    "askRoom": "¿Podrías especificarme qué tipo de habitación es? Por ejemplo, ¿se trata de una sala de estar, un dormitorio, una cocina o algún otro espacio? Con esta información, podremos adaptar nuestras sugerencias y soluciones de diseño para que se ajusten perfectamente a tus necesidades. ¡Estoy emocionada por trabajar contigo en este proyecto!",
+    "askStyle": "¡Vamos a darle un toque único a tu espacio! 😊 ¿Tienes alguna preferencia de estilo para la remodelación? Por ejemplo, ¿te gustaría un estilo *moderno*, *clásico*, *minimalista*, *rústico* o quizás una combinación de varios estilos? Conocer tus preferencias nos permitirá crear un diseño que refleje tu personalidad y se adapte a tu gusto. ¡Estoy emocionada por explorar las posibilidades contigo!",
+    "askColor": "¿Cuáles son tus colores preferidos o los que te gustaría destacar en la remodelación? Ya sea tonos cálidos y acogedores, colores vibrantes y llamativos, o tonos suaves y relajantes, tus preferencias de color son clave para crear un ambiente que te haga sentir en casa.",
+    "askMore": "¡Genial, vamos a hacer de tu proyecto algo único! 😊 ¿Hay algún detalle extra que debamos tener en cuenta durante la remodelación? Por ejemplo, alguna característica especial del espacio, necesidades específicas de iluminación o almacenamiento, o cualquier otro aspecto que sea importante para ti. Tu opinión es fundamental para crear un diseño que se ajuste perfectamente a tus necesidades y deseos. ¡Gracias por compartir esta información adicional con nosotros!"
+  },
+  "keys": {
+    "hello": ["hola", "que tal", "buen"]
+  }
+}

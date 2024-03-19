@@ -4,10 +4,11 @@ import { uploadImageAsync } from "src/services/bytescale";
 import { dayjsCustom } from "src/utils/dayjs";
 import { roomStyle, roomType } from "./remodela.entities";
 import { remodelImageAsync } from "src/services/replicate";
+import configJson from "src/config/message.config.json";
 
-export default BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
+export const remodelaFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
   .addAnswer(
-    "Necesito que me pases la imágen/foto de la habitación que quieres remodelar.",
+    configJson.remodelFlow.askImage,
     { capture: true },
     async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
       if (ctx.message.imageMessage) {
@@ -25,80 +26,80 @@ export default BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
         console.log("imageUrl", imageUrl);
         await state.update({ imageUrl });
       } else {
-        return fallBack(
-          "Necesito que me pases la imágen de la habitación que quieres amueblar"
-        );
+        return fallBack(configJson.remodelFlow.askImage);
       }
     }
   )
   .addAnswer(
-    `¿Cual es el tipo de habitación que quieres remodelar?: \n${roomType
-      .map((type) => `*${type}*`)
-      .join("\n")}`,
+    configJson.remodelFlow.askRoom,
     {
       capture: true,
     },
     async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
       let incomingMessage = ctx.body?.trim().toLowerCase();
-      if (roomType.some((type) => type.toLowerCase() === incomingMessage)) {
+      if (incomingMessage) {
         await state.update({
-          roomType: roomType.find(
-            (type) => type.toLowerCase() === incomingMessage
-          ),
+          roomType: incomingMessage,
         });
       } else {
-        return fallBack(
-          `¿Cual es el tipo de habitación que quieres remodelar?: \n${roomType
-            .map((type) => `*${type}*`)
-            .join("\n")}`
-        );
+        return fallBack(configJson.remodelFlow.askRoom);
       }
     }
   )
   .addAnswer(
-    `¿Cual es el estilo que deseas?: \n${roomStyle
-      .map((style) => `*${style}*`)
-      .join("\n")}`,
+    configJson.remodelFlow.askStyle,
     {
       capture: true,
     },
     async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
       let incomingMessage = ctx.body?.trim().toLowerCase();
-      if (roomStyle.some((style) => style.toLowerCase() === incomingMessage)) {
+      if (incomingMessage) {
         await state.update({
-          roomStyle: roomStyle.find(
-            (style) => style.toLowerCase() === incomingMessage
-          ),
+          roomStyle: incomingMessage,
         });
       } else {
-        return fallBack(
-          `¿Cual es el estilo que deseas?: \n${roomStyle
-            .map((style) => `*${style}*`)
-            .join("\n")}`
-        );
+        return fallBack(configJson.remodelFlow.askStyle);
+      }
+    }
+  )
+  .addAnswer(
+    configJson.remodelFlow.askColor,
+    {
+      capture: true,
+    },
+    async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
+      let incomingMessage = ctx.body?.trim().toLowerCase();
+      if (incomingMessage) {
+        await state.update({
+          colors: incomingMessage,
+        });
+      } else {
+        return fallBack(configJson.remodelFlow.askColor);
       }
     }
   )
   .addAction(async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
     flowDynamic(
-      "Estoy agregando los muebles a tu espacio. Por favor aguarda unos segundos..."
+      "Estoy remodelando tu espacio. Por favor, espera unos segundos mientras se realiza el renderizado. ¡Gracias por tu paciencia! ⏳✨"
     );
     let myState = state.getMyState();
     var response = await remodelImageAsync({
       fileUrl: myState.imageUrl,
       room: myState.roomType,
       style: myState.roomStyle,
-      colors: [],
+      colors: myState.colors,
       extraPrompt: myState.extraPrompt,
     });
     if (response) {
       return flowDynamic([
         {
           media: response,
-          body: " Aquí está el render. Espero que sea lo que tenías en mente. ¿Hay algo más en lo que pueda ayudarte?",
+          body: "¡Listo! Aquí está el resultado de la remodelación. ¡Espero que te guste! 🏡✨",
         },
       ]);
     } else {
-      return flowDynamic("Error, por favor intantalo de nuevo");
+      return flowDynamic(
+        `¡Ups! Parece que ha ocurrido un error inesperado durante el proceso de remodelación. Nuestro equipo técnico ya está trabajando para solucionarlo lo más pronto posible. Te pedimos disculpas por las molestias ocasionadas. Por favor, inténtalo nuevamente más tarde o contáctanos para recibir asistencia personalizada. ¡Gracias por tu comprensión!`
+      );
     }
   });

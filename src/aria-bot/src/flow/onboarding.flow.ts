@@ -1,9 +1,10 @@
 import BotWhatsapp from "@bot-whatsapp/bot";
 import { menuFlow } from "./menu.flow";
+import configJson from "src/config/message.config.json";
 
 export const onboardingFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
   .addAnswer(
-    "Cual es tu nombre",
+    configJson.askName,
     { capture: true },
     async (ctx, { state, gotoFlow }) => {
       try {
@@ -15,7 +16,7 @@ export const onboardingFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
     }
   )
   .addAnswer(
-    "De que Pais, provincia y ciudad/colonia te comunicas?\nMientrsa mas preciso sea tu informacion mejor ser[a la ayuda que te podremos brindar con nuestros arquitectos mas capacitados.",
+    configJson.askCity,
     { capture: true },
     async (ctx, { state, gotoFlow }) => {
       try {
