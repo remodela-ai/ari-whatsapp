@@ -10,19 +10,23 @@ export const helloFlow = BotWhatsapp.addKeyword(
 ).addAction(async (ctx: any, { state, gotoFlow, flowDynamic, provider }) => {
   try {
     await flowDynamic([
-      { body: configJson.welcome.replace("[name]", ctx.pushName) },
+      // { body: configJson.welcome.replace("[name]", ctx.pushName) },
+      {
+        media: "https://imgbb.host/images/aqbq2.png",
+        body: configJson.welcome.replace("[name]", ctx.pushName),
+      },
+      // { body: configJson.nota }
     ]);
     console.log(ctx);
     //--Send sticker 512x512 webp
-    const sock = await provider.getInstance();
-    const msgPoll = {
-      sticker: {
-        url: "https://imgbb.host/images/aasgc.webp",
-      },
-    };
-    await sock.sendMessage(ctx.key.remoteJid, msgPoll);
-
-    await flowDynamic([{ body: configJson.nota }]);
+    // const sock = await provider.getInstance();
+    // const msgPoll = {
+    //   sticker: {
+    //     url: "https://imgbb.host/images/aasgc.webp",
+    //   },
+    // };
+    // await sock.sendMessage(ctx.key.remoteJid, msgPoll);
+    // await flowDynamic([{ body: configJson.nota }]);
     let myState = state.getMyState();
     if (!myState?.name) {
       return gotoFlow(onboardingFlow);
