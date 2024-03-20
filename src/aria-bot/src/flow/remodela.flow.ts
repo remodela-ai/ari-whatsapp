@@ -5,6 +5,7 @@ import { dayjsCustom } from "src/utils/dayjs";
 import { roomStyle, roomType } from "./remodela.entities";
 import { remodelImageAsync } from "src/services/replicate";
 import configJson from "src/config/message.config.json";
+import { addRow } from "src/services/google-sheet/gSheetDB";
 
 export const remodelaFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
   .addAnswer(
@@ -91,6 +92,10 @@ export const remodelaFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
       extraPrompt: myState.extraPrompt,
     });
     if (response) {
+      await state.update({
+        image_url_prev: myState.imageUrl,
+        image_url_next: response,
+      });
       return flowDynamic([
         {
           media: response,
@@ -102,4 +107,51 @@ export const remodelaFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
         `¡Ups! Parece que ha ocurrido un error inesperado durante el proceso de remodelación. Nuestro equipo técnico ya está trabajando para solucionarlo lo más pronto posible. Te pedimos disculpas por las molestias ocasionadas. Por favor, inténtalo nuevamente más tarde o contáctanos para recibir asistencia personalizada. ¡Gracias por tu comprensión!`
       );
     }
-  });
+  })
+  .addAnswer(
+    configJson.remodelFlow.askPresupuesto,
+    {
+      capture: true,
+    },
+    async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
+      let incomingMessage = ctx.body?.trim().toLowerCase();
+      try {
+        let number = parseInt(incomingMessage);
+        let presupuesto;
+        switch (number) {
+          case 1:
+            presupuesto = "ENTRE $20000 y $50000 MXN";
+            break;
+          case 2:
+            presupuesto = "ENTRE $50000 y 100000 MXN";
+            break;
+          case 3:
+            presupuesto = "$100000 o MAS";
+            break;
+
+          default:
+            break;
+        }
+        if (!presupuesto) throw new Error("presupuesto is not a number!");
+        await state.update({
+          presupuesto,
+        });
+        let myState = state.getMyState();
+        console.log(myState);
+        await addRow({
+          telefono: ctx.from,
+          ambiente: myState.roomType,
+          estilo: myState.roomStyle,
+          image_url_prev: myState.image_url_prev,
+          image_url_next: myState.image_url_next,
+          nombre: myState.nombre,
+          ubicacion: myState.ubicacion,
+          presupuesto,
+        });
+        return flowDynamic([{ body: configJson.goodBye }]);
+      } catch (error) {
+        console.error("Remodela.flow > ", error);
+        return fallBack(configJson.remodelFlow.askPresupuesto);
+      }
+    }
+  );

@@ -2,6 +2,7 @@ import BotWhatsapp from "@bot-whatsapp/bot";
 import { onboardingFlow } from "./onboarding.flow";
 import { menuFlow } from "./menu.flow";
 import configJson from "src/config/message.config.json";
+import { findUserByPhone } from "src/services/google-sheet/gSheetDB";
 /**
  * Un flujo conversacion que responder a las palabras claves "hola", "buenas", ...
  */
@@ -28,8 +29,14 @@ export const helloFlow = BotWhatsapp.addKeyword(
     // await sock.sendMessage(ctx.key.remoteJid, msgPoll);
     // await flowDynamic([{ body: configJson.nota }]);
     let myState = state.getMyState();
-    if (!myState?.name) {
-      return gotoFlow(onboardingFlow);
+    if (!myState?.nombre) {
+      let user = await findUserByPhone(ctx.from);
+      if (user) {
+        console.log(user);
+        await state.update({ ...user });
+      } else {
+        return gotoFlow(onboardingFlow);
+      }
     }
     return gotoFlow(menuFlow);
   } catch (err) {

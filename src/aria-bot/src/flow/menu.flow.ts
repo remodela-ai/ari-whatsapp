@@ -4,13 +4,19 @@ import configJson from "src/config/message.config.json";
 import { onboardingFlow } from "./onboarding.flow";
 import { ideasFlow } from "./ideas.flow";
 import { sendMessageToConversationAsync } from "src/services/meetCody";
+import { findUserByPhone } from "src/services/google-sheet/gSheetDB";
 
 export const menuFlow = BotWhatsapp.addKeyword(configJson.keys.menu)
   .addAction(async (ctx: any, { state, gotoFlow, flowDynamic, provider }) => {
     try {
       let myState = state.getMyState();
-      if (!myState?.name) {
-        return gotoFlow(onboardingFlow);
+      if (!myState?.nombre) {
+        let user = await findUserByPhone(ctx.from);
+        if (user) {
+          state.update({ ...user });
+        } else {
+          return gotoFlow(onboardingFlow);
+        }
       }
       return;
     } catch (err) {

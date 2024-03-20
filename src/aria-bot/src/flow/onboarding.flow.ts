@@ -8,7 +8,7 @@ export const onboardingFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
     { capture: true },
     async (ctx, { state, gotoFlow }) => {
       try {
-        await state.update({ name: ctx.body });
+        await state.update({ nombre: ctx.body });
       } catch (err) {
         console.log(`[ERROR]:`, err);
         return;
@@ -20,7 +20,7 @@ export const onboardingFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
     { capture: true },
     async (ctx, { state, gotoFlow }) => {
       try {
-        await state.update({ city: ctx.body });
+        await state.update({ ubicacion: ctx.body });
         return gotoFlow(menuFlow);
       } catch (err) {
         console.log(`[ERROR]:`, err);
