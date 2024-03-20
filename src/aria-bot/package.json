@@ -25,6 +25,7 @@
     "express": "^4.18.3",
     "google-auth-library": "^9.7.0",
     "google-spreadsheet": "^4.1.1",
+    "googleapis": "^134.0.0",
     "openai": "^4.29.1",
     "wa-sticker-formatter": "4.4.4"
   },

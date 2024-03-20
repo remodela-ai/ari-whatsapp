@@ -13,6 +13,7 @@ export const CONFIG = {
 
   GOOGLE_SHEET: {
     SERVICE_ACCOUNT_EMAIL: process.env.SERVICE_ACCOUNT_EMAIL,
+    API_KEY: process.env.GOOGLE_APIKEY,
     PRIVATE_KEY: process.env.PRIVATE_KEY,
     SHEET_ID: process.env.SHEET_ID,
   },
