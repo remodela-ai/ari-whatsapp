@@ -5,6 +5,7 @@ export interface IUser {
   telefono: string;
   nombre: string;
   ubicacion: string;
+  cp: string;
 }
 
 export interface IRowUser extends IUser {
@@ -13,6 +14,8 @@ export interface IRowUser extends IUser {
   image_url_prev: string;
   image_url_next: string;
   presupuesto: string;
+  like: string;
+  agendarVisita: string;
 }
 
 export interface IParamsAddRow {

@@ -2,8 +2,12 @@
   "welcome": "👋 ¡Hola! [name]. Estoy aquí para ayudarte en tus proyectos de remodelación y decoración. 😊✨",
   "nota": "🌟¡Un recordatorio importante! 🌟 Aunque la IA es increíble, no puede reemplazar la experiencia y opinión de un profesional.",
   "askName": "😊 ¿Podrías decirme tu nombre y apellido, por favor? \n¡Gracias!",
-  "askCity": "¿En qué ciudad y dirección te encuentras? 🏙️🏠✨",
-  "goodBye": "Si necesitas más ayuda en el futuro, no dudes en contactarnos. ¡Que tengas un excelente día! 👋✨",
+  "askCity": "¿En qué ciudad te encuentras? 🏙️🏠✨",
+  "askCP": "¿Nos podrías indicar tu C.P. para verificar que contemos con servicio en tu zona por favor?",
+  "goodBye": "Puedes contactarnos al *55 4166 2821*, no olvides mencionar que vienes de parte de Ari 😉 Síguenos en nuestras redes sociales\nhttps://www.instagram.com/aquituremodelacion\nhttps://www.facebook.com/aquituremodelacion\nhttps://www.tiktok.com/@aquituremodelacion",
+  "termsConditions": "Para poder empezar a trabajar con el proyecto de tus sueños necesitamos conocer una breve información antes de comenzar\n¿estas de acuerdo?\n1- *Sí*\n2- *No*",
+  "termsConditionsNO": "Ok, Para poder utilizar este servicio es necesario que estés de acuerdo con los TyC",
+  "faq": "Preguntame lo que quieras, intentaré responder lo que necesites.",
   "menu": {
     "text": "¡Bienvenido/a a AQUÍ TU REMODELACIÓN! 🏡✨ Estamos aquí para hacer realidad tus proyectos de remodelación y decoración. ¿En qué podemos ayudarte hoy?",
     "btns": [
@@ -17,11 +21,12 @@
   },
   "remodelFlow": {
     "askImage": "¡Envía una foto del espacio a remodelar para recomendaciones precisas! 📸",
-    "askRoom": "¿Podrías especificarme qué tipo de habitación es? \n* *sala de estar*\n* *Dormitorio*\n* *cocina*\n* *oficina*\n* *Otro espacio*\n¡Estoy emocionada por trabajar contigo en este proyecto!",
-    "askStyle": "¡Vamos a darle un toque único a tu espacio! 😊 \n¿Tienes alguna preferencia de estilo para la remodelación?\n* *Moderno*\n* *Minimalista*\n* *Rustico*\n* *clasico*\n* *Industrial*\n* *Lujo*",
-    "askColor": "¿Cuáles son tus colores preferidos? (Escribilos separados por \",\". Ej: color1, color2, color3)",
+    "askRoom": "¿Podrías especificarme qué tipo de espacio es? \n* *Baño*\n* *Cocina*\n* *Dormitorio*\n* *Sala de estar*\n* *Otro espacio*\n¡Estoy emocionada por trabajar contigo en este proyecto!",
+    "askStyle": "¡Vamos a darle un toque único a tu espacio! 😊 \n¿Tienes alguna preferencia de estilo para la remodelación?\n* *Contemporáneo*\n* *Minimalista*\n* *Rústico*\n* *Clásico*\n* *Industrial*\n* *Lujo*",
+    "askColor": "¿Cuáles son tus colores preferidos? (Escríbelos separados por \",\". Ej: color1, color2, color3)",
     "askMore": "¡Genial, vamos a hacer de tu proyecto algo único! 😊 ¿Hay algún detalle extra que debamos tener en cuenta durante la remodelación? Por ejemplo, alguna característica especial del espacio, necesidades específicas de iluminación o almacenamiento, o cualquier otro aspecto que sea importante para ti. Tu opinión es fundamental para crear un diseño que se ajuste perfectamente a tus necesidades y deseos. ¡Gracias por compartir esta información adicional con nosotros!",
-    "askPresupuesto": "¿Tienes algún presupuesto en mente para tu proyecto? \n1- Entre $20000 y $50000 MXN \n2- Entre $50000 y $100000 MXN\n3- $100000 o MAS\nPor favor, selecciona una opción."
+    "askPresupuesto": "¿Tienes algún presupuesto en mente para tu proyecto? \n1- Entre $20000 y $50000 MXN \n2- Entre $50000 y $100000 MXN\n3- $100000 o MAS\nPor favor, selecciona una opción.",
+    "askAgendarVisita": "¿Te gustaría agendar una visita y/o llamada por parte de nuestro equipo?.\n1- *Sí*\n2- *No*"
   },
   "keys": {
     "hello": ["hola", "que tal", "buen"],

@@ -23,6 +23,9 @@ export const readSheet = async () => {
       telefono: "sadf",
       nombre: "asdf",
       ubicacion: "asdf",
+      agendarVisita: "test",
+      cp: "",
+      like: "",
     });
   } catch (error) {
     console.log(error.message, error.stack);

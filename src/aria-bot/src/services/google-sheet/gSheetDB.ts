@@ -5,11 +5,14 @@ const ROW_ID = {
   telefono: 0,
   nombre: 1,
   ubicacion: 2,
-  ambiente: 3,
-  estilo: 4,
-  image_url_prev: 5,
-  image_url_next: 6,
-  presupuesto: 7,
+  cp: 3,
+  ambiente: 4,
+  estilo: 5,
+  image_url_prev: 6,
+  image_url_next: 7,
+  presupuesto: 8,
+  like: 9,
+  agendarVisita: 10,
 };
 const getSheetAsync = async () => {
   try {
@@ -30,6 +33,7 @@ export const buildUser = (row: Array<string>): IUser => {
     nombre: row[ROW_ID.nombre],
     telefono: row[ROW_ID.telefono],
     ubicacion: row[ROW_ID.ubicacion],
+    cp: row[ROW_ID.cp],
   };
 };
 

@@ -5,6 +5,7 @@ import { onboardingFlow } from "./onboarding.flow";
 import { ideasFlow } from "./ideas.flow";
 import { sendMessageToConversationAsync } from "src/services/meetCody";
 import { findUserByPhone } from "src/services/google-sheet/gSheetDB";
+import { faqFlow } from "./faq.flow";
 
 export const menuFlow = BotWhatsapp.addKeyword(configJson.keys.menu)
   .addAction(async (ctx: any, { state, gotoFlow, flowDynamic, provider }) => {
@@ -45,6 +46,9 @@ export const menuFlow = BotWhatsapp.addKeyword(configJson.keys.menu)
         message == "ideas"
       ) {
         return gotoFlow(ideasFlow);
+      }
+      if (message == "3" || message == "preguntas" || message == "pregunta") {
+        return gotoFlow(faqFlow);
       }
       const resultText = await sendMessageToConversationAsync(ctx.body, null);
       if (resultText) {

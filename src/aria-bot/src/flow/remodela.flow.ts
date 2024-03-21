@@ -103,7 +103,7 @@ export const remodelaFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
         },
       ]);
     } else {
-      return flowDynamic(
+      return endFlow(
         `¡Ups! Parece que ha ocurrido un error inesperado durante el proceso de remodelación. Nuestro equipo técnico ya está trabajando para solucionarlo lo más pronto posible. Te pedimos disculpas por las molestias ocasionadas. Por favor, inténtalo nuevamente más tarde o contáctanos para recibir asistencia personalizada. ¡Gracias por tu comprensión!`
       );
     }
@@ -136,22 +136,50 @@ export const remodelaFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
         await state.update({
           presupuesto,
         });
-        let myState = state.getMyState();
-        console.log(myState);
-        await addRow({
-          telefono: ctx.from,
-          ambiente: myState.roomType,
-          estilo: myState.roomStyle,
-          image_url_prev: myState.image_url_prev,
-          image_url_next: myState.image_url_next,
-          nombre: myState.nombre,
-          ubicacion: myState.ubicacion,
-          presupuesto,
-        });
-        return flowDynamic([{ body: configJson.goodBye }]);
       } catch (error) {
         console.error("Remodela.flow > ", error);
         return fallBack(configJson.remodelFlow.askPresupuesto);
       }
     }
-  );
+  )
+  .addAnswer(
+    configJson.remodelFlow.askAgendarVisita,
+    { capture: true },
+    async (ctx, { state, gotoFlow, fallBack, endFlow }) => {
+      let incomingMessage = ctx.body?.trim().toLowerCase();
+      if (["1", "si", "sí"].includes(incomingMessage)) {
+        await state.update({
+          agendarVisita: "Sí",
+        });
+      } else if (["2", "no"].includes(incomingMessage)) {
+        await state.update({
+          agendarVisita: "No",
+        });
+      } else {
+        return fallBack(configJson.remodelFlow.askStyle);
+      }
+    }
+  )
+  .addAction(async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
+    try {
+      let myState = state.getMyState();
+      console.log(myState);
+      await addRow({
+        telefono: ctx.from,
+        ambiente: myState.roomType,
+        estilo: myState.roomStyle,
+        image_url_prev: myState.image_url_prev,
+        image_url_next: myState.image_url_next,
+        nombre: myState.nombre,
+        ubicacion: myState.ubicacion,
+        cp: myState.cp,
+        presupuesto: myState.presupuesto,
+        agendarVisita: myState.agendarVisita,
+        like: myState.like, //No hay flujo para capturar este dato
+      });
+      return flowDynamic([{ body: configJson.goodBye }]);
+    } catch (error) {
+      console.error("Remodela.flow > ", error);
+      return endFlow("Ocurrió un erro, por favor volvamos a intentarlo.");
+    }
+  });

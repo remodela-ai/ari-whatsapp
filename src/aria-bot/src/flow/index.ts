@@ -6,6 +6,7 @@ import { remodelaFlow } from "./remodela.flow";
 import { ideasFlow } from "./ideas.flow";
 import { codyFlow } from "./cody.flow";
 import { welcomeFlow } from "./welcome.flow";
+import { faqFlow } from "./faq.flow";
 // import paypalFlow from "./paypal.flow";
 // import chatbotFlow from "./chatbot.flow";
 // import nodeFlow from "./node.flow";
@@ -19,8 +20,9 @@ export default BotWhatsapp.createFlow([
   menuFlow,
   ideasFlow,
   codyFlow,
-  onboardingFlow,
+  faqFlow,
   welcomeFlow,
+  onboardingFlow,
   //   paypalFlow,
   //   chatbotFlow,
   //   nodeFlow,
