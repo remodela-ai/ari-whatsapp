@@ -13,7 +13,7 @@ export const helloFlow = BotWhatsapp.addKeyword(
     await flowDynamic([
       // { body: configJson.welcome.replace("[name]", ctx.pushName) },
       {
-        media: "https://imgbb.host/images/aqbq2.png",
+        media: "https://i.ibb.co/1LBXqK6/ARI1-Mesa-de-trabajo-1.png",
         body: configJson.welcome.replace("[name]", ctx.pushName),
       },
       // { body: configJson.nota }

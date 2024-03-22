@@ -1,8 +1,8 @@
 import { UploadManager } from "@bytescale/sdk";
-// import fetch from "node-fetch";
+import fetch from "node-fetch";
 import { CONFIG } from "src/config/config";
-const fetch = (...args: any) =>
-  import("node-fetch").then(({ default: fetch }: any) => fetch(...args));
+// const fetch = (...args: any) =>
+//   import("node-fetch").then(({ default: fetch }: any) => fetch(...args));
 
 export const uploadImageAsync = async (image): Promise<string> => {
   const uploadManager = new UploadManager({

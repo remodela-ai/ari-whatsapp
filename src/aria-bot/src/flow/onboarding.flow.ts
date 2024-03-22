@@ -1,6 +1,7 @@
 import BotWhatsapp from "@bot-whatsapp/bot";
 import { menuFlow } from "./menu.flow";
 import configJson from "src/config/message.config";
+import { addUserAsync } from "src/services/google-sheet/gSheetDB";
 
 export const onboardingFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
   .addAnswer(
@@ -47,10 +48,25 @@ export const onboardingFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
     async (ctx, { state, gotoFlow }) => {
       try {
         await state.update({ cp: ctx.body });
-        return gotoFlow(menuFlow);
+        return;
       } catch (err) {
         console.log(`[ERROR]:`, err);
         return;
       }
     }
-  );
+  )
+  .addAction(async (ctx, { flowDynamic, state, gotoFlow, endFlow }) => {
+    try {
+      let myState = state.getMyState();
+      await addUserAsync({
+        telefono: ctx.from,
+        nombre: myState.nombre,
+        ubicacion: myState.ubicacion,
+        cp: myState.cp,
+      });
+      return gotoFlow(menuFlow);
+    } catch (error) {
+      console.error("Remodela.flow > ", error);
+      return endFlow("Ocurrió un erro, por favor volvamos a intentarlo.");
+    }
+  });

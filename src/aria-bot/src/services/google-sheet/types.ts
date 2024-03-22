@@ -22,5 +22,5 @@ export interface IParamsAddRow {
   spreadsheetId: string;
   auth: JSONClient | Compute;
   sheetName: string;
-  rowUser: IRowUser;
+  values: Array<Array<string>>;
 }

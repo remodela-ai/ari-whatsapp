@@ -1,4 +1,4 @@
-import { addRow } from "./gSheetDB";
+import { addRowRemodelaAsync } from "./gSheetDB";
 import { getAuthToken, getSpreadSheet, getSpreadSheetValues } from "./index";
 import { CONFIG } from "src/config/config";
 
@@ -14,7 +14,7 @@ export const readSheet = async () => {
       "output for getSpreadSheet",
       JSON.stringify(response.data, null, 2)
     );
-    addRow({
+    addRowRemodelaAsync({
       ambiente: "TEST",
       estilo: "RETRO",
       image_url_prev: "asdfa",

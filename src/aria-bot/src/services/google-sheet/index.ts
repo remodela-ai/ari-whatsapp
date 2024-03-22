@@ -34,7 +34,7 @@ export async function addValuesAsync({
   spreadsheetId,
   auth,
   sheetName,
-  rowUser,
+  values,
 }: IParamsAddRow): Promise<boolean> {
   const res = await sheets.spreadsheets.values.append({
     spreadsheetId,
@@ -42,21 +42,7 @@ export async function addValuesAsync({
     range: sheetName,
     valueInputOption: "USER_ENTERED",
     requestBody: {
-      values: [
-        [
-          rowUser.telefono,
-          rowUser.nombre,
-          rowUser.ubicacion,
-          rowUser.cp,
-          rowUser.ambiente,
-          rowUser.estilo,
-          rowUser.image_url_prev,
-          rowUser.image_url_next,
-          rowUser.presupuesto,
-          rowUser.like,
-          rowUser.agendarVisita,
-        ],
-      ],
+      values,
     },
   });
   return res.status === 200;

@@ -4,28 +4,36 @@ import { uploadImageAsync } from "src/services/bytescale";
 import { dayjsCustom } from "src/utils/dayjs";
 import { remodelImageAsync } from "src/services/replicate";
 import configJson from "src/config/message.config";
-import { addRow } from "src/services/google-sheet/gSheetDB";
+import { addRowRemodelaAsync } from "src/services/google-sheet/gSheetDB";
 
 export const remodelaFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
   .addAnswer(
     configJson.remodelFlow.askImage,
     { capture: true },
     async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
-      if (ctx.message.imageMessage) {
-        const buffer = await downloadMediaMessage(ctx as any, "buffer", {});
-        console.log("buffer", buffer);
-        console.log("ctx", ctx);
-        var imageUrl = await uploadImageAsync({
-          buffer,
-          mimeType: ctx.message.imageMessage.mimetype,
-          phoneNumber: ctx.from,
-          name: `${ctx.from}-${dayjsCustom()
-            .tz("America/Mexico_City")
-            .format("YYYYMMDD_HHmmss")}.jpeg`,
-        });
-        console.log("imageUrl", imageUrl);
-        await state.update({ imageUrl });
-      } else {
+      try {
+        if (ctx.message.imageMessage) {
+          const buffer = await downloadMediaMessage(ctx as any, "buffer", {});
+          console.log("buffer > ", buffer);
+          console.log("ctx > ", ctx);
+          var imageUrl = await uploadImageAsync({
+            buffer,
+            mimeType: ctx.message.imageMessage.mimetype,
+            phoneNumber: ctx.from,
+            name: `${ctx.from}-${dayjsCustom()
+              .tz("America/Mexico_City")
+              .format("YYYYMMDD_HHmmss")}.jpeg`,
+          });
+          console.log("imageUrl", imageUrl);
+          await state.update({ imageUrl });
+        } else {
+          return fallBack(configJson.remodelFlow.askImage);
+        }
+      } catch (error) {
+        flowDynamic([
+          { body: "Algo salió mal, ¿podrías enviarme de nuevo la imágen?" },
+        ]);
+        console.error("[RemodelaFlow] ERROR > ", error);
         return fallBack(configJson.remodelFlow.askImage);
       }
     }
@@ -83,28 +91,41 @@ export const remodelaFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
       "Estoy remodelando tu espacio. Por favor, espera unos segundos mientras se realiza el renderizado. ¡Gracias por tu paciencia! ⏳✨"
     );
     let myState = state.getMyState();
-    var response = await remodelImageAsync({
-      fileUrl: myState.imageUrl,
-      room: myState.roomType,
-      style: myState.roomStyle,
-      colors: myState.colors,
-      extraPrompt: myState.extraPrompt,
-    });
-    if (response) {
+    let imagenObtenida;
+
+    while (!imagenObtenida) {
+      remodelImageAsync({
+        fileUrl: myState.imageUrl,
+        room: myState.roomType,
+        style: myState.roomStyle,
+        colors: myState.colors,
+        extraPrompt: myState.extraPrompt,
+      })
+        .then((result) => (imagenObtenida = result))
+        .catch((e) => {
+          console.error("[RemodelaFlow] Error> ", e);
+          return endFlow(
+            `¡Ups! Parece que ha ocurrido un error inesperado durante el proceso de remodelación. Nuestro equipo técnico ya está trabajando para solucionarlo lo más pronto posible. Te pedimos disculpas por las molestias ocasionadas. Por favor, inténtalo nuevamente más tarde o contáctanos para recibir asistencia personalizada. ¡Gracias por tu comprensión!`
+          );
+        });
+
+      if (!imagenObtenida) {
+        // Espera 30 segundos antes de la siguiente iteración
+        await new Promise((resolve) => setTimeout(resolve, 30000));
+        await flowDynamic([{ body: "Sigo remodelando tu espacio..." }]);
+      }
+    }
+    if (imagenObtenida) {
       await state.update({
         image_url_prev: myState.imageUrl,
-        image_url_next: response,
+        image_url_next: imagenObtenida,
       });
       return flowDynamic([
         {
-          media: response,
+          media: imagenObtenida,
           body: "¡Listo! Aquí está el resultado de la remodelación. ¡Espero que te guste! 🏡✨",
         },
       ]);
-    } else {
-      return endFlow(
-        `¡Ups! Parece que ha ocurrido un error inesperado durante el proceso de remodelación. Nuestro equipo técnico ya está trabajando para solucionarlo lo más pronto posible. Te pedimos disculpas por las molestias ocasionadas. Por favor, inténtalo nuevamente más tarde o contáctanos para recibir asistencia personalizada. ¡Gracias por tu comprensión!`
-      );
     }
   })
   .addAnswer(
@@ -163,7 +184,7 @@ export const remodelaFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
     try {
       let myState = state.getMyState();
       console.log(myState);
-      await addRow({
+      await addRowRemodelaAsync({
         telefono: ctx.from,
         ambiente: myState.roomType,
         estilo: myState.roomStyle,

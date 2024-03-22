@@ -31,5 +31,6 @@ FROM builder as deploy
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/package.json /app/pnpm-lock.yaml ./
 
+RUN npm install --global node-fetch@2
 RUN pnpm install --frozen-lockfile --production
 CMD ["npm", "start"]

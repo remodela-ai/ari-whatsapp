@@ -14,13 +14,13 @@ const ROW_ID = {
   like: 9,
   agendarVisita: 10,
 };
-const getSheetAsync = async () => {
+const getSheetAsync = async (sheetName: string) => {
   try {
     const auth = await getAuthToken();
     const response = await getSpreadSheetValues({
       spreadsheetId: CONFIG.GOOGLE_SHEET.SHEET_ID,
       auth,
-      sheetName: "Users",
+      sheetName,
     });
     return response.data.values;
   } catch (error) {
@@ -38,7 +38,7 @@ export const buildUser = (row: Array<string>): IUser => {
 };
 
 export const findUserByPhone = async (phoneNumber: string): Promise<IUser> => {
-  const values = await getSheetAsync();
+  const values = await getSheetAsync("Users");
   if (values) {
     const find = values.find((r, i) => r[ROW_ID.telefono] === phoneNumber);
     return find && buildUser(find);
@@ -46,12 +46,36 @@ export const findUserByPhone = async (phoneNumber: string): Promise<IUser> => {
   return null;
 };
 
-export const addRow = async (row: IRowUser): Promise<boolean> => {
+export const addRowRemodelaAsync = async (row: IRowUser): Promise<boolean> => {
+  const auth = await getAuthToken();
+  return await addValuesAsync({
+    spreadsheetId: CONFIG.GOOGLE_SHEET.SHEET_ID,
+    auth,
+    sheetName: "Remodela",
+    values: [
+      [
+        row.telefono,
+        row.nombre,
+        row.ubicacion,
+        row.cp,
+        row.ambiente,
+        row.estilo,
+        row.image_url_prev,
+        row.image_url_next,
+        row.presupuesto,
+        row.like,
+        row.agendarVisita,
+      ],
+    ],
+  });
+};
+
+export const addUserAsync = async (user: IUser): Promise<boolean> => {
   const auth = await getAuthToken();
   return await addValuesAsync({
     spreadsheetId: CONFIG.GOOGLE_SHEET.SHEET_ID,
     auth,
     sheetName: "Users",
-    rowUser: row,
+    values: [[user.telefono, user.nombre, user.ubicacion, user.cp]],
   });
 };
