@@ -1,6 +1,5 @@
 import BotWhatsapp from "@bot-whatsapp/bot";
 import { onboardingFlow } from "./onboarding.flow";
-import { menuFlow } from "./menu.flow";
 import { codyFlow } from "./cody.flow";
 import { findUserByPhone } from "src/services/google-sheet/gSheetDB";
 

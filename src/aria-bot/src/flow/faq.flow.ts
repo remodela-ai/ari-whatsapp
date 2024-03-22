@@ -1,8 +1,5 @@
 import BotWhatsapp from "@bot-whatsapp/bot";
-import { onboardingFlow } from "./onboarding.flow";
-import { menuFlow } from "./menu.flow";
-import configJson from "src/config/message.config.json";
-import { sendMessageToConversationAsync } from "src/services/meetCody";
+import configJson from "src/config/message.config";
 import { codyFlow } from "./cody.flow";
 /**
  * Un flujo conversacion que responder a las palabras claves "hola", "buenas", ...

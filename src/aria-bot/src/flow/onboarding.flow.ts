@@ -1,6 +1,6 @@
 import BotWhatsapp from "@bot-whatsapp/bot";
 import { menuFlow } from "./menu.flow";
-import configJson from "src/config/message.config.json";
+import configJson from "src/config/message.config";
 
 export const onboardingFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
   .addAnswer(

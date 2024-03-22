@@ -2,9 +2,8 @@ import BotWhatsapp from "@bot-whatsapp/bot";
 import { downloadMediaMessage } from "@whiskeysockets/baileys";
 import { uploadImageAsync } from "src/services/bytescale";
 import { dayjsCustom } from "src/utils/dayjs";
-import { roomStyle, roomType } from "./remodela.entities";
 import { remodelImageAsync } from "src/services/replicate";
-import configJson from "src/config/message.config.json";
+import configJson from "src/config/message.config";
 import { addRow } from "src/services/google-sheet/gSheetDB";
 
 export const remodelaFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)

@@ -1,6 +1,6 @@
 import BotWhatsapp from "@bot-whatsapp/bot";
 import { remodelaFlow } from "./remodela.flow";
-import configJson from "src/config/message.config.json";
+import configJson from "src/config/message.config";
 import { onboardingFlow } from "./onboarding.flow";
 import { ideasFlow } from "./ideas.flow";
 import { sendMessageToConversationAsync } from "src/services/meetCody";
