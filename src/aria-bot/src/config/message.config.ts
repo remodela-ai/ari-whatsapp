@@ -11,7 +11,7 @@ export default {
   termsConditions:
     "Para poder empezar a trabajar con el proyecto de tus sueños necesitamos conocer una breve información antes de comenzar\n¿estas de acuerdo?\n1- *Sí*\n2- *No*",
   termsConditionsNO:
-    "Ok, Para poder utilizar este servicio es necesario que estés de acuerdo con los TyC",
+    "Disculpa, sin estos datos nos es complicado brindarte el servicio que te mereces, si gustas volver a intentarlo responde *Si*.",
   faq: "Preguntame lo que quieras, intentaré responder lo que necesites.",
   menu: {
     text: "¡Bienvenido/a a AQUÍ TU REMODELACIÓN! 🏡✨ Estamos aquí para hacer realidad tus proyectos de remodelación y decoración. ¿En qué podemos ayudarte hoy?",
@@ -40,6 +40,10 @@ export default {
       "¿Tienes algún presupuesto en mente para tu proyecto? \n1- Entre $20000 y $50000 MXN \n2- Entre $50000 y $100000 MXN\n3- $100000 o MAS\nPor favor, selecciona una opción.",
     askAgendarVisita:
       "¿Te gustaría agendar una visita y/o llamada por parte de nuestro equipo?.\n1- *Sí*\n2- *No*",
+    askAgendarVisita_SI:
+      "¡Perfecto! Estamos emocionados por visitarte y platicar tus proyectos de remodelación. Una persona de nuestro equipo te contactara en breve, si tienes alguna pregunta no dudes en llamarnos te comparto nuestro teléfono de Contact Center: 55 4166 2821",
+    askAgendarVisita_NO:
+      "Entiendo, no hay problema. Si en el futuro cambias de parecer o tienes alguna pregunta, no dudes en contactarnos. Estamos aquí para ayudarte en cualquier momento.",
   },
   keys: {
     hello: ["hola", "que tal", "buen"],

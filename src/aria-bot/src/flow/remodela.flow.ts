@@ -8,6 +8,40 @@ import { addRowRemodelaAsync } from "src/services/google-sheet/gSheetDB";
 
 export const remodelaFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
   .addAnswer(
+    configJson.remodelFlow.askPresupuesto,
+    {
+      capture: true,
+    },
+    async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
+      let incomingMessage = ctx.body?.trim().toLowerCase();
+      try {
+        let number = parseInt(incomingMessage);
+        let presupuesto;
+        switch (number) {
+          case 1:
+            presupuesto = "ENTRE $20000 y $50000 MXN";
+            break;
+          case 2:
+            presupuesto = "ENTRE $50000 y 100000 MXN";
+            break;
+          case 3:
+            presupuesto = "$100000 o MAS";
+            break;
+
+          default:
+            break;
+        }
+        if (!presupuesto) throw new Error("presupuesto is not a number!");
+        await state.update({
+          presupuesto,
+        });
+      } catch (error) {
+        console.error("Remodela.flow > ", error);
+        return fallBack(configJson.remodelFlow.askPresupuesto);
+      }
+    }
+  )
+  .addAnswer(
     configJson.remodelFlow.askImage,
     { capture: true },
     async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
@@ -129,52 +163,24 @@ export const remodelaFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
     }
   })
   .addAnswer(
-    configJson.remodelFlow.askPresupuesto,
-    {
-      capture: true,
-    },
-    async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
-      let incomingMessage = ctx.body?.trim().toLowerCase();
-      try {
-        let number = parseInt(incomingMessage);
-        let presupuesto;
-        switch (number) {
-          case 1:
-            presupuesto = "ENTRE $20000 y $50000 MXN";
-            break;
-          case 2:
-            presupuesto = "ENTRE $50000 y 100000 MXN";
-            break;
-          case 3:
-            presupuesto = "$100000 o MAS";
-            break;
-
-          default:
-            break;
-        }
-        if (!presupuesto) throw new Error("presupuesto is not a number!");
-        await state.update({
-          presupuesto,
-        });
-      } catch (error) {
-        console.error("Remodela.flow > ", error);
-        return fallBack(configJson.remodelFlow.askPresupuesto);
-      }
-    }
-  )
-  .addAnswer(
     configJson.remodelFlow.askAgendarVisita,
     { capture: true },
-    async (ctx, { state, gotoFlow, fallBack, endFlow }) => {
+    async (ctx, { state, flowDynamic, fallBack, endFlow }) => {
       let incomingMessage = ctx.body?.trim().toLowerCase();
       if (["1", "si", "sí"].includes(incomingMessage)) {
         await state.update({
           agendarVisita: "Sí",
         });
+        return flowDynamic([
+          { body: configJson.remodelFlow.askAgendarVisita_SI },
+        ]);
       } else if (["2", "no"].includes(incomingMessage)) {
         await state.update({
           agendarVisita: "No",
         });
+        return flowDynamic([
+          { body: configJson.remodelFlow.askAgendarVisita_NO },
+        ]);
       } else {
         return fallBack(configJson.remodelFlow.askStyle);
       }
