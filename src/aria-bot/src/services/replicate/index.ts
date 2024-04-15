@@ -64,3 +64,25 @@ export const remodelImageAsync = async (
   }
   return generatedImage;
 };
+
+export const getImageBufferFromURLAsync = async (
+  imageUrl: string
+): Promise<Buffer> => {
+  try {
+    const response = await axios.get(imageUrl, {
+      headers: {
+        "Content-Type": "image/jpeg",
+      },
+      responseType: "arraybuffer",
+    });
+    if (response.data) {
+      return Buffer.from(response.data);
+    }
+    return null;
+  } catch (error) {
+    console.error(
+      "[Replicate][getImageBufferFromURL] Error al descargar la imagen:",
+      error
+    );
+  }
+};

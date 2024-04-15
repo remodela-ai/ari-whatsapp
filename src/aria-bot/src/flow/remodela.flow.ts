@@ -2,7 +2,10 @@ import BotWhatsapp from "@bot-whatsapp/bot";
 import { downloadMediaMessage } from "@whiskeysockets/baileys";
 import { uploadImageAsync } from "src/services/bytescale";
 import { dayjsCustom } from "src/utils/dayjs";
-import { remodelImageAsync } from "src/services/replicate";
+import {
+  getImageBufferFromURLAsync,
+  remodelImageAsync,
+} from "src/services/replicate";
 import configJson from "src/config/message.config";
 import { addRowRemodelaAsync } from "src/services/google-sheet/gSheetDB";
 
@@ -190,12 +193,23 @@ export const remodelaFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
     try {
       let myState = state.getMyState();
       console.log(myState);
+      const getBufferImage = await getImageBufferFromURLAsync(
+        myState.image_url_next
+      );
+      let imageUrl = await uploadImageAsync({
+        buffer: getBufferImage,
+        mimeType: "image/jpeg",
+        phoneNumber: ctx.from,
+        name: `${ctx.from}-${dayjsCustom()
+          .tz("America/Mexico_City")
+          .format("YYYYMMDD_HHmmss")}.jpeg`,
+      });
       await addRowRemodelaAsync({
         telefono: ctx.from,
         ambiente: myState.roomType,
         estilo: myState.roomStyle,
         image_url_prev: myState.image_url_prev,
-        image_url_next: myState.image_url_next,
+        image_url_next: imageUrl,
         nombre: myState.nombre,
         ubicacion: myState.ubicacion,
         cp: myState.cp,
