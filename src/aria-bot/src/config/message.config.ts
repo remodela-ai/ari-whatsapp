@@ -9,7 +9,7 @@ export default {
   goodBye:
     "Puedes contactarnos al *55 4166 2821*, no olvides mencionar que vienes de parte de Ari 😉 Síguenos en nuestras redes sociales\nhttps://www.instagram.com/aquituremodelacion\nhttps://www.facebook.com/aquituremodelacion\nhttps://www.tiktok.com/@aquituremodelacion",
   termsConditions:
-    "Para poder empezar a trabajar con el proyecto de tus sueños necesitamos conocer una breve información antes de comenzar\n¿estas de acuerdo?\n1- *Sí*\n2- *No*",
+    "Para poder empezar a trabajar con el proyecto de tus sueños necesitamos conocer una breve información antes de comenzar\n¿estas de acuerdo?\n1- *Sí*\n2- *No*\nEscribe el número que corresponda a tu elección.",
   termsConditionsNO:
     "Disculpa, sin estos datos nos es complicado brindarte el servicio que te mereces, si gustas volver a intentarlo responde *Si*.",
   faq: "Preguntame lo que quieras, intentaré responder lo que necesites.",
@@ -37,7 +37,7 @@ export default {
     askMore:
       "¡Genial, vamos a hacer de tu proyecto algo único! 😊 ¿Hay algún detalle extra que debamos tener en cuenta durante la remodelación? Por ejemplo, alguna característica especial del espacio, necesidades específicas de iluminación o almacenamiento, o cualquier otro aspecto que sea importante para ti. Tu opinión es fundamental para crear un diseño que se ajuste perfectamente a tus necesidades y deseos. ¡Gracias por compartir esta información adicional con nosotros!",
     askPresupuesto:
-      "¿Tienes algún presupuesto en mente para tu proyecto? \n1- Entre $20000 y $50000 MXN \n2- Entre $50000 y $100000 MXN\n3- $100000 o MAS\nPor favor, selecciona una opción.",
+      "¿Tienes algún presupuesto en mente para tu proyecto? \n1- Entre $20000 y $50000 MXN \n2- Entre $50000 y $100000 MXN\n3- $100000 o MAS\nEscribe el número que corresponda a tu elección.",
     askAgendarVisita:
       "¿Te gustaría agendar una visita y/o llamada por parte de nuestro equipo?.\n1- *Sí*\n2- *No*",
     askAgendarVisita_SI:

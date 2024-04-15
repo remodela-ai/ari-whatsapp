@@ -28,7 +28,7 @@ export const menuFlow = BotWhatsapp.addKeyword(configJson.keys.menu)
   .addAnswer(
     `${configJson.menu.text} \n${configJson.menu.btns
       .map((optText, index) => `*${index + 1}*- ${optText}`)
-      .join("\n")}`,
+      .join("\n")}\nEscribe el número que corresponda a tu elección.`,
     {
       capture: true,
     },
