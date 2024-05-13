@@ -1,9 +1,7 @@
 import BotWhatsapp from "@bot-whatsapp/bot";
 import { helloFlow } from "./hello.flow";
-import { menuFlow } from "./menu.flow";
 import { onboardingFlow } from "./onboarding.flow";
 import { remodelaFlow } from "./remodela.flow";
-import { ideasFlow } from "./ideas.flow";
 import { codyFlow } from "./cody.flow";
 import { welcomeFlow } from "./welcome.flow";
 import { faqFlow } from "./faq.flow";

@@ -3,6 +3,7 @@ import { onboardingFlow } from "./onboarding.flow";
 import { menuFlow } from "./menu.flow";
 import configJson from "src/config/message.config";
 import { findUserByPhone } from "src/services/google-sheet/gSheetDB";
+import { remodelaFlow } from "./remodela.flow";
 /**
  * Un flujo conversacion que responder a las palabras claves "hola", "buenas", ...
  */
@@ -38,8 +39,8 @@ export const helloFlow = BotWhatsapp.addKeyword(
         return gotoFlow(onboardingFlow);
       }
     }
-    endFlow();
-    // return gotoFlow(menuFlow);
+    // endFlow();
+    return gotoFlow(remodelaFlow);
   } catch (err) {
     console.log(`[ERROR]:`, err);
     return;

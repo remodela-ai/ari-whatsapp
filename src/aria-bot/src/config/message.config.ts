@@ -15,7 +15,7 @@ export default {
     "Disculpa, sin estos datos nos es complicado brindarte el servicio que te mereces, si gustas volver a intentarlo responde *Si*.",
   faq: "Preguntame lo que quieras, intentaré responder lo que necesites.",
   menu: {
-    text: "¡Bienvenido/a a AQUÍ TU REMODELACIÓN! 🏡✨ Estamos aquí para hacer realidad tus proyectos de remodelación y decoración. ¿En qué podemos ayudarte hoy?",
+    text: "¡Bienvenido/a a AQUÍ TU REMODELACIÓN! 🏡✨ Estamos aquí para hacer realidad tus proyectos de remodelación. ¿En qué podemos ayudarte hoy?",
     btns: [
       "*Remodelar* un espacio 🛠️",
       "*Ideas* de decoración 💡",

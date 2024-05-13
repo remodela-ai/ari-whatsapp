@@ -1,7 +1,7 @@
 import BotWhatsapp from "@bot-whatsapp/bot";
-import { menuFlow } from "./menu.flow";
 import configJson from "src/config/message.config";
 import { addUserAsync } from "src/services/google-sheet/gSheetDB";
+import { remodelaFlow } from "./remodela.flow";
 
 export const onboardingFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
   .addAnswer(
@@ -64,7 +64,7 @@ export const onboardingFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
         ubicacion: myState.ubicacion,
         cp: myState.cp,
       });
-      return gotoFlow(menuFlow);
+      return gotoFlow(remodelaFlow);
     } catch (error) {
       console.error("Remodela.flow > ", error);
       return endFlow("Ocurrió un erro, por favor volvamos a intentarlo.");
