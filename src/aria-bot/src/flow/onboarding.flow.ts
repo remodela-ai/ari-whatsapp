@@ -42,19 +42,19 @@ export const onboardingFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
       }
     }
   )
-  .addAnswer(
-    configJson.askCP,
-    { capture: true },
-    async (ctx, { state, gotoFlow }) => {
-      try {
-        await state.update({ cp: ctx.body });
-        return;
-      } catch (err) {
-        console.log(`[ERROR]:`, err);
-        return;
-      }
-    }
-  )
+  // .addAnswer(
+  //   configJson.askCP,
+  //   { capture: true },
+  //   async (ctx, { state, gotoFlow }) => {
+  //     try {
+  //       await state.update({ cp: ctx.body });
+  //       return;
+  //     } catch (err) {
+  //       console.log(`[ERROR]:`, err);
+  //       return;
+  //     }
+  //   }
+  // )
   .addAction(async (ctx, { flowDynamic, state, gotoFlow, endFlow }) => {
     try {
       let myState = state.getMyState();

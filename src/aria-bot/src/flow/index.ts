@@ -17,8 +17,8 @@ import { faqFlow } from "./faq.flow";
 export default BotWhatsapp.createFlow([
   helloFlow,
   remodelaFlow,
-  menuFlow,
-  ideasFlow,
+  // menuFlow,
+  // ideasFlow,
   codyFlow,
   faqFlow,
   welcomeFlow,

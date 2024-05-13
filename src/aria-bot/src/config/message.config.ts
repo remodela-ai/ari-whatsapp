@@ -3,7 +3,8 @@ export default {
     "👋 ¡Hola!. Estoy aquí para ayudarte en tus proyectos de remodelación y decoración. 😊✨",
   nota: "🌟¡Un recordatorio importante! 🌟 Aunque la IA es increíble, no puede reemplazar la experiencia y opinión de un profesional.",
   askName: "😊 ¿Podrías decirme tu nombre y apellido, por favor? \n¡Gracias!",
-  askCity: "¿En qué ciudad te encuentras? 🏙️🏠✨",
+  askCity:
+    "¿En qué ciudad te encuentras? Y si recuerdas, ¿podrías indicar tu código postal? Para verificar que contemos con servicio en tu zona 🏙️🏠✨",
   askCP:
     "¿Nos podrías indicar tu C.P. para verificar que contemos con servicio en tu zona por favor?",
   goodBye:
@@ -29,9 +30,18 @@ export default {
     askImage:
       "¡Envía una foto del espacio a remodelar para recomendaciones precisas! 📸",
     askRoom:
-      "¿Podrías especificarme qué tipo de espacio es? \n* *Baño*\n* *Cocina*\n* *Dormitorio*\n* *Sala de estar*\n* *Otro espacio*\n¡Estoy emocionada por trabajar contigo en este proyecto!",
+      "¿Podrías especificarme qué tipo de espacio es? \n[roomType]\n¡Estoy emocionada por trabajar contigo en este proyecto!",
+    roomType: ["Baño", "Cocina", "Dormitorio", "Sala de estar", "Fachada"],
     askStyle:
-      "¡Vamos a darle un toque único a tu espacio! 😊 \n¿Tienes alguna preferencia de estilo para la remodelación?\n* *Contemporáneo*\n* *Minimalista*\n* *Rústico*\n* *Clásico*\n* *Industrial*\n* *Lujo*",
+      "¡Vamos a darle un toque único a tu espacio! 😊 \n¿Tienes alguna preferencia de estilo para la remodelación?\n[roomStyle]",
+    roomStyle: [
+      "Contemporáneo",
+      "Minimalista",
+      "Rústico",
+      "Clásico",
+      "Industrial",
+      "Lujo",
+    ],
     askColor:
       '¿Cuáles son tus colores preferidos? (Escríbelos separados por ",". Ej: color1, color2, color3)',
     askMore:
@@ -39,9 +49,9 @@ export default {
     askPresupuesto:
       "¿Tienes algún presupuesto en mente para tu proyecto? \n1- Entre $20000 y $50000 MXN \n2- Entre $50000 y $100000 MXN\n3- $100000 o MAS\nEscribe el número que corresponda a tu elección.",
     askAgendarVisita:
-      "¿Te gustaría agendar una visita y/o llamada por parte de nuestro equipo?.\n1- *Sí*\n2- *No*",
+      "¿Te gustaría agendar una llamada por parte de nuestro equipo?.\n1- *Sí*\n2- *No*",
     askAgendarVisita_SI:
-      "¡Perfecto! Estamos emocionados por visitarte y platicar tus proyectos de remodelación. Una persona de nuestro equipo te contactara en breve, si tienes alguna pregunta no dudes en llamarnos te comparto nuestro teléfono de Contact Center: 55 4166 2821",
+      "¡Perfecto! Estamos emocionados por contactarnos y platicar tus proyectos de remodelación. Una persona de nuestro equipo te contactara en breve, si tienes alguna pregunta no dudes en llamarnos te comparto nuestro teléfono de Contact Center: 55 4166 2821",
     askAgendarVisita_NO:
       "Entiendo, no hay problema. Si en el futuro cambias de parecer o tienes alguna pregunta, no dudes en contactarnos. Estamos aquí para ayudarte en cualquier momento.",
   },

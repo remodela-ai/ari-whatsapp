@@ -7,9 +7,63 @@ import {
   remodelImageAsync,
 } from "src/services/replicate";
 import configJson from "src/config/message.config";
-import { addRowRemodelaAsync } from "src/services/google-sheet/gSheetDB";
+import {
+  addRowRemodelaAsync,
+  findUserByPhone,
+} from "src/services/google-sheet/gSheetDB";
+import { onboardingFlow } from "./onboarding.flow";
+import { convertirANumero } from "src/utils/utils";
 
-export const remodelaFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
+export const remodelaFlow = BotWhatsapp.addKeyword(["Remodela"])
+  .addAction(async (ctx, { state, gotoFlow }) => {
+    try {
+      let myState = state.getMyState();
+      console.log(ctx);
+      if (!myState?.name) {
+        let user = await findUserByPhone(ctx.from);
+        if (user) {
+          console.log(user);
+          await state.update({ ...user });
+        } else {
+          return gotoFlow(onboardingFlow);
+        }
+      }
+    } catch (err) {
+      console.log(`[ERROR]:`, err);
+      return;
+    }
+  })
+  .addAnswer(
+    configJson.remodelFlow.askImage,
+    { capture: true },
+    async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
+      try {
+        if (ctx.message.imageMessage) {
+          const buffer = await downloadMediaMessage(ctx as any, "buffer", {});
+          console.log("buffer > ", buffer);
+          console.log("ctx > ", ctx);
+          var imageUrl = await uploadImageAsync({
+            buffer,
+            mimeType: ctx.message.imageMessage.mimetype,
+            phoneNumber: ctx.from,
+            name: `${ctx.from}-${dayjsCustom()
+              .tz("America/Mexico_City")
+              .format("YYYYMMDD_HHmmss")}.jpeg`,
+          });
+          console.log("imageUrl", imageUrl);
+          await state.update({ imageUrl });
+        } else {
+          return fallBack(configJson.remodelFlow.askImage);
+        }
+      } catch (error) {
+        flowDynamic([
+          { body: "Algo salió mal, ¿podrías enviarme de nuevo la imágen?" },
+        ]);
+        console.error("[RemodelaFlow] ERROR > ", error);
+        return fallBack(configJson.remodelFlow.askImage);
+      }
+    }
+  )
   .addAnswer(
     configJson.remodelFlow.askPresupuesto,
     {
@@ -45,68 +99,109 @@ export const remodelaFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
     }
   )
   .addAnswer(
-    configJson.remodelFlow.askImage,
-    { capture: true },
+    configJson.remodelFlow.askRoom.replace(
+      "[roomType]",
+      configJson.remodelFlow.roomType
+        .map((rt, ix) => `${ix + 1}- ${rt}`)
+        .join("\n")
+    ),
+    {
+      capture: true,
+    },
     async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
       try {
-        if (ctx.message.imageMessage) {
-          const buffer = await downloadMediaMessage(ctx as any, "buffer", {});
-          console.log("buffer > ", buffer);
-          console.log("ctx > ", ctx);
-          var imageUrl = await uploadImageAsync({
-            buffer,
-            mimeType: ctx.message.imageMessage.mimetype,
-            phoneNumber: ctx.from,
-            name: `${ctx.from}-${dayjsCustom()
-              .tz("America/Mexico_City")
-              .format("YYYYMMDD_HHmmss")}.jpeg`,
-          });
-          console.log("imageUrl", imageUrl);
-          await state.update({ imageUrl });
-        } else {
-          return fallBack(configJson.remodelFlow.askImage);
+        let incomingMessage = ctx.body?.trim().toLowerCase();
+        if (incomingMessage) {
+          if (
+            configJson.remodelFlow.roomType
+              .map((rt) => rt.toLowerCase())
+              .includes(incomingMessage)
+          ) {
+            await state.update({
+              roomType: incomingMessage,
+            });
+          } else {
+            let index = convertirANumero(incomingMessage);
+            if (index && index <= configJson.remodelFlow.roomType.length) {
+              incomingMessage = configJson.remodelFlow.roomType[index - 1];
+              await state.update({
+                roomType: incomingMessage,
+              });
+            } else throw new Error("No existe la opcion");
+          }
         }
       } catch (error) {
-        flowDynamic([
-          { body: "Algo salió mal, ¿podrías enviarme de nuevo la imágen?" },
-        ]);
-        console.error("[RemodelaFlow] ERROR > ", error);
-        return fallBack(configJson.remodelFlow.askImage);
+        return fallBack(
+          configJson.remodelFlow.askRoom.replace(
+            "[roomType]",
+            configJson.remodelFlow.roomType
+              .map((rt, ix) => `${ix + 1}- ${rt}`)
+              .join("\n")
+          )
+        );
       }
     }
   )
   .addAnswer(
-    configJson.remodelFlow.askRoom,
+    configJson.remodelFlow.askStyle.replace(
+      "[roomStyle]",
+      configJson.remodelFlow.roomStyle
+        .map((rt, ix) => `${ix + 1}- ${rt}`)
+        .join("\n")
+    ),
     {
       capture: true,
     },
     async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
-      let incomingMessage = ctx.body?.trim().toLowerCase();
-      if (incomingMessage) {
-        await state.update({
-          roomType: incomingMessage,
-        });
-      } else {
-        return fallBack(configJson.remodelFlow.askRoom);
+      try {
+        let incomingMessage = ctx.body?.trim().toLowerCase();
+        if (incomingMessage) {
+          if (
+            configJson.remodelFlow.roomStyle
+              .map((rt) => rt.toLowerCase())
+              .includes(incomingMessage)
+          ) {
+            await state.update({
+              roomStyle: incomingMessage,
+            });
+          } else {
+            let index = convertirANumero(incomingMessage);
+            if (index && index <= configJson.remodelFlow.roomStyle.length) {
+              incomingMessage = configJson.remodelFlow.roomStyle[index - 1];
+              await state.update({
+                roomStyle: incomingMessage,
+              });
+            } else throw new Error("No existe la opcion");
+          }
+        }
+      } catch (error) {
+        return fallBack(
+          configJson.remodelFlow.askStyle.replace(
+            "[roomStyle]",
+            configJson.remodelFlow.roomStyle
+              .map((rt, ix) => `${ix + 1}- ${rt}`)
+              .join("\n")
+          )
+        );
       }
     }
   )
-  .addAnswer(
-    configJson.remodelFlow.askStyle,
-    {
-      capture: true,
-    },
-    async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
-      let incomingMessage = ctx.body?.trim().toLowerCase();
-      if (incomingMessage) {
-        await state.update({
-          roomStyle: incomingMessage,
-        });
-      } else {
-        return fallBack(configJson.remodelFlow.askStyle);
-      }
-    }
-  )
+  // .addAnswer(
+  //   configJson.remodelFlow.askStyle,
+  //   {
+  //     capture: true,
+  //   },
+  //   async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
+  //     let incomingMessage = ctx.body?.trim().toLowerCase();
+  //     if (incomingMessage) {
+  //       await state.update({
+  //         roomStyle: incomingMessage,
+  //       });
+  //     } else {
+  //       return fallBack(configJson.remodelFlow.askStyle);
+  //     }
+  //   }
+  // )
   .addAnswer(
     configJson.remodelFlow.askColor,
     {

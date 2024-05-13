@@ -8,7 +8,7 @@ import { findUserByPhone } from "src/services/google-sheet/gSheetDB";
  */
 export const helloFlow = BotWhatsapp.addKeyword(
   configJson.keys.hello
-).addAction(async (ctx: any, { state, gotoFlow, flowDynamic, provider }) => {
+).addAction(async (ctx: any, { state, gotoFlow, flowDynamic, endFlow }) => {
   try {
     await flowDynamic([
       // { body: configJson.welcome.replace("[name]", ctx.pushName) },
@@ -38,7 +38,8 @@ export const helloFlow = BotWhatsapp.addKeyword(
         return gotoFlow(onboardingFlow);
       }
     }
-    return gotoFlow(menuFlow);
+    endFlow();
+    // return gotoFlow(menuFlow);
   } catch (err) {
     console.log(`[ERROR]:`, err);
     return;
