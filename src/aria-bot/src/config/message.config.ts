@@ -1,6 +1,6 @@
 export default {
   welcome:
-    "👋 ¡Hola!. Estoy aquí para ayudarte en tus proyectos de remodelación y decoración. 😊✨",
+    "👋 ¡Hola!. Estoy aquí para ayudarte en tus proyectos de remodelación. 😊✨",
   nota: "🌟¡Un recordatorio importante! 🌟 Aunque la IA es increíble, no puede reemplazar la experiencia y opinión de un profesional.",
   askName: "😊 ¿Podrías decirme tu nombre y apellido, por favor? \n¡Gracias!",
   askCity:

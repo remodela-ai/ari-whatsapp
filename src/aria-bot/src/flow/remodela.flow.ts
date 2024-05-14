@@ -14,7 +14,10 @@ import {
 import { onboardingFlow } from "./onboarding.flow";
 import { convertirANumero } from "src/utils/utils";
 
-export const remodelaFlow = BotWhatsapp.addKeyword(["Remodela"])
+export const remodelaFlow = BotWhatsapp.addKeyword(
+  ["Remodela", "remodela", "remodelar", "Remodelar"],
+  { sensitive: true }
+)
   .addAction(async (ctx, { state, gotoFlow }) => {
     try {
       let myState = state.getMyState();
