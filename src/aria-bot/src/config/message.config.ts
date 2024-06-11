@@ -31,7 +31,15 @@ export default {
       "¡Envía una foto del espacio a remodelar para recomendaciones precisas! 📸",
     askRoom:
       "¿Podrías especificarme qué tipo de espacio es? \n[roomType]\n¡Estoy emocionada por trabajar contigo en este proyecto!",
-    roomType: ["Baño", "Cocina", "Dormitorio", "Sala de estar", "Fachada"],
+    roomType: [
+      "Baño",
+      "Cocina",
+      "Dormitorio",
+      "Sala de estar",
+      "Fachada",
+      "Oficina",
+      "Comercio",
+    ],
     askStyle:
       "¡Vamos a darle un toque único a tu espacio! 😊 \n¿Tienes alguna preferencia de estilo para la remodelación?\n[roomStyle]",
     roomStyle: [
@@ -47,9 +55,9 @@ export default {
     askMore:
       "¡Genial, vamos a hacer de tu proyecto algo único! 😊 ¿Hay algún detalle extra que debamos tener en cuenta durante la remodelación? Por ejemplo, alguna característica especial del espacio, necesidades específicas de iluminación o almacenamiento, o cualquier otro aspecto que sea importante para ti. Tu opinión es fundamental para crear un diseño que se ajuste perfectamente a tus necesidades y deseos. ¡Gracias por compartir esta información adicional con nosotros!",
     askPresupuesto:
-      "¿Tienes algún presupuesto en mente para tu proyecto? \n1- Entre $20000 y $50000 MXN \n2- Entre $50000 y $100000 MXN\n3- $100000 o MAS\nEscribe el número que corresponda a tu elección.",
+      "Para conocer tu estilo, cuéntanos qué tipo de materiales te gustaría que contemplenos en tu ejecución de tu proyecto:\n1- Ecónomico \n2- Gama Media\n3- Premium\nEscribe el número que corresponda a tu elección.",
     askAgendarVisita:
-      "¿Te gustaría agendar una llamada por parte de nuestro equipo?.\n1- *Sí*\n2- *No*",
+      "¿Te gustaría agendar una llamada por parte de nuestro equipo?\n1- *Sí*\n2- *No*",
     askAgendarVisita_SI:
       "¡Perfecto! Estamos emocionados por contactarnos y platicar tus proyectos de remodelación. Una persona de nuestro equipo te contactara en breve, si tienes alguna pregunta no dudes en llamarnos te comparto nuestro teléfono de Contact Center: 55 4166 2821",
     askAgendarVisita_NO:

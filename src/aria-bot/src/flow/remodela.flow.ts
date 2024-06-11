@@ -79,13 +79,13 @@ export const remodelaFlow = BotWhatsapp.addKeyword(
         let presupuesto;
         switch (number) {
           case 1:
-            presupuesto = "ENTRE $20000 y $50000 MXN";
+            presupuesto = "Ecónomico";
             break;
           case 2:
-            presupuesto = "ENTRE $50000 y 100000 MXN";
+            presupuesto = "Gama Media";
             break;
           case 3:
-            presupuesto = "$100000 o MAS";
+            presupuesto = "Premium";
             break;
 
           default:
