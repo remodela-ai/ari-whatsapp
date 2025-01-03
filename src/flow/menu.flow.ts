@@ -6,13 +6,16 @@ import { ideasFlow } from "./ideas.flow";
 import { sendMessageToConversationAsync } from "src/services/meetCody";
 import { findUserByPhone } from "src/services/google-sheet/gSheetDB";
 import { faqFlow } from "./faq.flow";
+import type { BaileysProvider } from "@builderbot/provider-baileys";
 
-export const menuFlow = BotWhatsapp.addKeyword(configJson.keys.menu)
+export const menuFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.MemoryDB>(
+  ["menu", ...configJson.keys.menu]
+)
   .addAction(async (ctx, { state, gotoFlow, flowDynamic, provider }) => {
     try {
-      let myState = state.getMyState();
+      const myState = state.getMyState();
       if (!myState?.nombre) {
-        let user = await findUserByPhone(ctx.from);
+        const user = await findUserByPhone(ctx.from);
         if (user) {
           state.update({ ...user });
         } else {
@@ -21,7 +24,7 @@ export const menuFlow = BotWhatsapp.addKeyword(configJson.keys.menu)
       }
       return;
     } catch (err) {
-      console.log(`[ERROR]:`, err);
+      console.log("[ERROR]:", err);
       return;
     }
   })
@@ -32,7 +35,7 @@ export const menuFlow = BotWhatsapp.addKeyword(configJson.keys.menu)
     {
       capture: true,
     },
-    async (ctx: any, { flowDynamic, state, fallBack, endFlow, gotoFlow }) => {
+    async (ctx, { flowDynamic, state, fallBack, endFlow, gotoFlow }) => {
       const message = ctx.body?.toLowerCase().trim();
       console.log(message);
       console.log(ctx);

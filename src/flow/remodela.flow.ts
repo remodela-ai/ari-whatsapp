@@ -21,10 +21,10 @@ export const remodelaFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.
 )
   .addAction(async (ctx, { state, gotoFlow }) => {
     try {
-      let myState = state.getMyState();
+      const myState = state.getMyState();
       console.log(ctx);
       if (!myState?.name) {
-        let user = await findUserByPhone(ctx.from);
+        const user = await findUserByPhone(ctx.from);
         if (user) {
           console.log(user);
           await state.update({ ...user });
@@ -33,7 +33,7 @@ export const remodelaFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.
         }
       }
     } catch (err) {
-      console.log(`[ERROR]:`, err);
+      console.log("[ERROR]:", err);
       return;
     }
   })
@@ -74,10 +74,10 @@ export const remodelaFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.
       capture: true,
     },
     async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
-      let incomingMessage = ctx.body?.trim().toLowerCase();
+      const incomingMessage = ctx.body?.trim().toLowerCase();
       try {
-        let number = parseInt(incomingMessage);
-        let presupuesto;
+        const number = Number.parseInt(incomingMessage);
+        let presupuesto: string;
         switch (number) {
           case 1:
             presupuesto = "Ecónomico";
@@ -125,7 +125,7 @@ export const remodelaFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.
               roomType: incomingMessage,
             });
           } else {
-            let index = convertirANumero(incomingMessage);
+            const index = convertirANumero(incomingMessage);
             if (index && index <= configJson.remodelFlow.roomType.length) {
               incomingMessage = configJson.remodelFlow.roomType[index - 1];
               await state.update({
@@ -169,7 +169,7 @@ export const remodelaFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.
               roomStyle: incomingMessage,
             });
           } else {
-            let index = convertirANumero(incomingMessage);
+            const index = convertirANumero(incomingMessage);
             if (index && index <= configJson.remodelFlow.roomStyle.length) {
               incomingMessage = configJson.remodelFlow.roomStyle[index - 1];
               await state.update({
@@ -212,7 +212,7 @@ export const remodelaFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.
       capture: true,
     },
     async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
-      let incomingMessage = ctx.body?.trim().toLowerCase();
+      const incomingMessage = ctx.body?.trim().toLowerCase();
       if (incomingMessage) {
         await state.update({
           colors: incomingMessage,
@@ -226,8 +226,8 @@ export const remodelaFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.
     flowDynamic(
       "Estoy remodelando tu espacio. Por favor, espera unos segundos mientras se realiza el renderizado. ¡Gracias por tu paciencia! ⏳✨"
     );
-    let myState = state.getMyState();
-    let imagenObtenida;
+    const myState = state.getMyState();
+    let imagenObtenida: string;
 
     while (!imagenObtenida) {
       remodelImageAsync({
@@ -241,7 +241,7 @@ export const remodelaFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.
         .catch((e) => {
           console.error("[RemodelaFlow] Error> ", e);
           return endFlow(
-            `¡Ups! Parece que ha ocurrido un error inesperado durante el proceso de remodelación. Nuestro equipo técnico ya está trabajando para solucionarlo lo más pronto posible. Te pedimos disculpas por las molestias ocasionadas. Por favor, inténtalo nuevamente más tarde o contáctanos para recibir asistencia personalizada. ¡Gracias por tu comprensión!`
+            "¡Ups! Parece que ha ocurrido un error inesperado durante el proceso de remodelación. Nuestro equipo técnico ya está trabajando para solucionarlo lo más pronto posible. Te pedimos disculpas por las molestias ocasionadas. Por favor, inténtalo nuevamente más tarde o contáctanos para recibir asistencia personalizada. ¡Gracias por tu comprensión!"
           );
         });
 
@@ -268,7 +268,7 @@ export const remodelaFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.
     configJson.remodelFlow.askAgendarVisita,
     { capture: true },
     async (ctx, { state, flowDynamic, fallBack, endFlow }) => {
-      let incomingMessage = ctx.body?.trim().toLowerCase();
+      const incomingMessage = ctx.body?.trim().toLowerCase();
       if (["1", "si", "sí"].includes(incomingMessage)) {
         await state.update({
           agendarVisita: "Sí",
@@ -276,26 +276,28 @@ export const remodelaFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.
         return flowDynamic([
           { body: configJson.remodelFlow.askAgendarVisita_SI },
         ]);
-      } else if (["2", "no"].includes(incomingMessage)) {
+      }
+      
+      if (["2", "no"].includes(incomingMessage)) {
         await state.update({
           agendarVisita: "No",
         });
         return flowDynamic([
           { body: configJson.remodelFlow.askAgendarVisita_NO },
         ]);
-      } else {
-        return fallBack(configJson.remodelFlow.askStyle);
       }
+
+      return fallBack(configJson.remodelFlow.askStyle);
     }
   )
   .addAction(async (ctx, { flowDynamic, state, fallBack, endFlow }) => {
     try {
-      let myState = state.getMyState();
+      const myState = state.getMyState();
       console.log(myState);
       const getBufferImage = await getImageBufferFromURLAsync(
         myState.image_url_next
       );
-      let imageUrl = await uploadImageAsync({
+      const imageUrl = await uploadImageAsync({
         buffer: getBufferImage,
         mimeType: "image/jpeg",
         phoneNumber: ctx.from,

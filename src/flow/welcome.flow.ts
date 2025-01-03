@@ -10,10 +10,10 @@ export const welcomeFlow = BotWhatsapp.addKeyword(
   BotWhatsapp.EVENTS.WELCOME
 ).addAction(async (ctx, { state, gotoFlow }) => {
   try {
-    let myState = state.getMyState();
+    const myState = state.getMyState();
     console.log(ctx);
     if (!myState?.name) {
-      let user = await findUserByPhone(ctx.from);
+      const user = await findUserByPhone(ctx.from);
       if (user) {
         console.log(user);
         await state.update({ ...user });
@@ -24,7 +24,7 @@ export const welcomeFlow = BotWhatsapp.addKeyword(
     console.log("got to codyFlow");
     return gotoFlow(codyFlow);
   } catch (err) {
-    console.log(`[ERROR]:`, err);
+    console.log("[ERROR]:", err);
     return;
   }
 });

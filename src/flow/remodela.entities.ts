@@ -18,4 +18,4 @@ export const roomStyle = [
   "Estándar",
 ];
 
-export const remodelaPrompt = `[ROOM] con estilo [STYLE]. colores [COLORS]. 4k. photorealistic. Iluminación leds.`;
+export const remodelaPrompt = "[ROOM] con estilo [STYLE]. colores [COLORS]. 4k. photorealistic. Iluminación leds.";

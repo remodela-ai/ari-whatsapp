@@ -1,14 +1,14 @@
 import BotWhatsapp from "@builderbot/bot";
 import { onboardingFlow } from "./onboarding.flow";
-import { menuFlow } from "./menu.flow";
 import configJson from "src/config/message.config";
 import { findUserByPhone } from "src/services/google-sheet/gSheetDB";
 import { remodelaFlow } from "./remodela.flow";
+import type { BaileysProvider } from "@builderbot/provider-baileys";
 /**
  * Un flujo conversacion que responder a las palabras claves "hola", "buenas", ...
  */
-export const helloFlow = BotWhatsapp.addKeyword(
-  configJson.keys.hello
+export const helloFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.MemoryDB>(
+  ["hello", ...configJson.keys.hello]
 ).addAction(async (ctx, { state, gotoFlow, flowDynamic, endFlow }) => {
   try {
     await flowDynamic([
@@ -29,9 +29,10 @@ export const helloFlow = BotWhatsapp.addKeyword(
     // };
     // await sock.sendMessage(ctx.key.remoteJid, msgPoll);
     // await flowDynamic([{ body: configJson.nota }]);
-    let myState = state.getMyState();
+    const myState = state.getMyState();
+
     if (!myState?.nombre) {
-      let user = await findUserByPhone(ctx.from);
+      const user = await findUserByPhone(ctx.from);
       if (user) {
         console.log(user);
         await state.update({ ...user });
@@ -42,7 +43,7 @@ export const helloFlow = BotWhatsapp.addKeyword(
     // endFlow();
     return gotoFlow(remodelaFlow);
   } catch (err) {
-    console.log(`[ERROR]:`, err);
+    console.log("[ERROR]:", err);
     return;
   }
 });
