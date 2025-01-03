@@ -25,6 +25,10 @@ const main = async () => {
     fileStream.pipe(res);
   })
 
+  provider.server.get("/health", (req, res) => {
+    res.status(200).json({ status: "ok" });
+  });
+
   const { httpServer } = await BotWhatsapp.createBot({
     database: adapterDB,
     provider,
