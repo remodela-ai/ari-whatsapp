@@ -18,7 +18,18 @@ const main = async () => {
     readStatus: false
   });
 
+  provider.server.get("/", (req, res) => {
+    res.status(200).json({ status: "ok" });
+  });
+
   provider.server.get("/qr", (req, res) => {
+    const valid = req.query.valid === "true";
+
+    if (!valid) {
+      res.status(401).json({ status: "unauthorized" });
+      return;
+    }
+
     const PATH_QR = join(process.cwd(), 'bot.qr.png');
     const fileStream = createReadStream(PATH_QR);
     res.writeHead(200, { "Content-Type": "image/png" });
