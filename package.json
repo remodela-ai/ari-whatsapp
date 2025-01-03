@@ -11,11 +11,8 @@
   },
   "keywords": [],
   "dependencies": {
-    "@bot-whatsapp/bot": "latest",
-    "@bot-whatsapp/cli": "latest",
-    "@bot-whatsapp/database": "latest",
-    "@bot-whatsapp/portal": "latest",
-    "@bot-whatsapp/provider": "latest",
+    "@builderbot/bot": "latest",
+    "@builderbot/provider-baileys": "latest",
     "@bytescale/sdk": "^3.34.0",
     "@whiskeysockets/baileys": "6.5.0",
     "axios": "^1.6.8",

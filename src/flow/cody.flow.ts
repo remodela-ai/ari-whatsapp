@@ -1,9 +1,9 @@
-import BotWhatsapp from "@bot-whatsapp/bot";
+import BotWhatsapp from "@builderbot/bot";
 import { sendMessageToConversationAsync } from "src/services/meetCody";
 
 export const codyFlow = BotWhatsapp.addKeyword(
   BotWhatsapp.EVENTS.ACTION
-).addAction(async (ctx: any, { state, gotoFlow, flowDynamic, endFlow }) => {
+).addAction(async (ctx, { state, gotoFlow, flowDynamic, endFlow }) => {
   try {
     const resultText = await sendMessageToConversationAsync(ctx.body, null);
     if (resultText) {

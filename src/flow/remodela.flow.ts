@@ -1,4 +1,4 @@
-import BotWhatsapp from "@bot-whatsapp/bot";
+import BotWhatsapp from "@builderbot/bot";
 import { downloadMediaMessage } from "@whiskeysockets/baileys";
 import { uploadImageAsync } from "src/services/bytescale";
 import { dayjsCustom } from "src/utils/dayjs";
@@ -13,8 +13,9 @@ import {
 } from "src/services/google-sheet/gSheetDB";
 import { onboardingFlow } from "./onboarding.flow";
 import { convertirANumero } from "src/utils/utils";
+import type { BaileysProvider } from "@builderbot/provider-baileys";
 
-export const remodelaFlow = BotWhatsapp.addKeyword(
+export const remodelaFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.MemoryDB>(
   ["Remodela", "remodela", "remodelar", "Remodelar"],
   { sensitive: true }
 )
@@ -45,7 +46,7 @@ export const remodelaFlow = BotWhatsapp.addKeyword(
           const buffer = await downloadMediaMessage(ctx as any, "buffer", {});
           console.log("buffer > ", buffer);
           console.log("ctx > ", ctx);
-          var imageUrl = await uploadImageAsync({
+          const imageUrl = await uploadImageAsync({
             buffer,
             mimeType: ctx.message.imageMessage.mimetype,
             phoneNumber: ctx.from,

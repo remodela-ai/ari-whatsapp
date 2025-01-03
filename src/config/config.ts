@@ -1,5 +1,6 @@
 export const CONFIG = {
   PORT: process.env.PORT || 4000,
+
   REPLICATE_API_TOKEN: process.env.REPLICATE_API_TOKEN,
   REPLICATE_URL: process.env.REPLICATE_URL,
 

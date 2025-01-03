@@ -1,14 +1,15 @@
-import BotWhatsapp from "@bot-whatsapp/bot";
+import BotWhatsapp from "@builderbot/bot";
+import configJson from "src/config/message.config";
 import { codyFlow } from "./cody.flow";
 /**
  * Un flujo conversacion que responder a las palabras claves "hola", "buenas", ...
  */
-export const ideasFlow = BotWhatsapp.addKeyword(
+export const faqFlow = BotWhatsapp.addKeyword(
   BotWhatsapp.EVENTS.ACTION
 ).addAnswer(
-  "Por favor, cuéntame qué tipo de ideas o consejos estás buscando. ¡Estoy emocionada por inspirarte! 🏡💡",
+  configJson.faq,
   { capture: true },
-  async (ctx: any, { state, gotoFlow, flowDynamic, provider, endFlow }) => {
+  async (ctx, { state, gotoFlow, flowDynamic, provider, endFlow }) => {
     try {
       gotoFlow(codyFlow);
     } catch (err) {

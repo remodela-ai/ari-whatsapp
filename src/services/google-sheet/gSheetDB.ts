@@ -72,6 +72,7 @@ export const addRowRemodelaAsync = async (row: IRowUser): Promise<boolean> => {
 
 export const addUserAsync = async (user: IUser): Promise<boolean> => {
   const auth = await getAuthToken();
+
   return await addValuesAsync({
     spreadsheetId: CONFIG.GOOGLE_SHEET.SHEET_ID,
     auth,

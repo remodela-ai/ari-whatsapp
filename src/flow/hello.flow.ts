@@ -1,4 +1,4 @@
-import BotWhatsapp from "@bot-whatsapp/bot";
+import BotWhatsapp from "@builderbot/bot";
 import { onboardingFlow } from "./onboarding.flow";
 import { menuFlow } from "./menu.flow";
 import configJson from "src/config/message.config";
@@ -9,7 +9,7 @@ import { remodelaFlow } from "./remodela.flow";
  */
 export const helloFlow = BotWhatsapp.addKeyword(
   configJson.keys.hello
-).addAction(async (ctx: any, { state, gotoFlow, flowDynamic, endFlow }) => {
+).addAction(async (ctx, { state, gotoFlow, flowDynamic, endFlow }) => {
   try {
     await flowDynamic([
       // { body: configJson.welcome.replace("[name]", ctx.pushName) },

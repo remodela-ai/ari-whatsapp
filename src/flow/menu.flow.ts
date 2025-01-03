@@ -1,4 +1,4 @@
-import BotWhatsapp from "@bot-whatsapp/bot";
+import BotWhatsapp from "@builderbot/bot";
 import { remodelaFlow } from "./remodela.flow";
 import configJson from "src/config/message.config";
 import { onboardingFlow } from "./onboarding.flow";
@@ -8,7 +8,7 @@ import { findUserByPhone } from "src/services/google-sheet/gSheetDB";
 import { faqFlow } from "./faq.flow";
 
 export const menuFlow = BotWhatsapp.addKeyword(configJson.keys.menu)
-  .addAction(async (ctx: any, { state, gotoFlow, flowDynamic, provider }) => {
+  .addAction(async (ctx, { state, gotoFlow, flowDynamic, provider }) => {
     try {
       let myState = state.getMyState();
       if (!myState?.nombre) {
