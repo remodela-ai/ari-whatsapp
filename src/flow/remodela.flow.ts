@@ -237,7 +237,9 @@ export const remodelaFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.
         colors: myState.colors,
         extraPrompt: myState.extraPrompt,
       })
-        .then((result) => (imagenObtenida = result))
+        .then((result) => {
+          imagenObtenida = result;
+        })
         .catch((e) => {
           console.error("[RemodelaFlow] Error> ", e);
           return endFlow(

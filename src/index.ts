@@ -19,14 +19,16 @@ const main = async () => {
   });
 
   provider.server.get("/", (req, res) => {
-    res.status(200).json({ status: "ok" });
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ status: "ok" }));
   });
 
   provider.server.get("/qr", (req, res) => {
     const valid = req.query.valid === "true";
 
     if (!valid) {
-      res.status(401).json({ status: "unauthorized" });
+      res.writeHead(401, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ status: "unauthorized" }));
       return;
     }
 
@@ -37,7 +39,8 @@ const main = async () => {
   })
 
   provider.server.get("/health", (req, res) => {
-    res.status(200).json({ status: "ok" });
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ status: "ok" }));
   });
 
   const { httpServer } = await BotWhatsapp.createBot({

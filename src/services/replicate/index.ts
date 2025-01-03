@@ -1,6 +1,6 @@
 import axios from "axios";
 import { CONFIG } from "src/config/config";
-import { IRemodelaParams } from "./types";
+import type { IRemodelaParams } from "./types";
 import { remodelaPrompt } from "src/flow/remodela.entities";
 
 const buildRemodelPrompt = (params: IRemodelaParams) => {
@@ -40,17 +40,17 @@ export const remodelImageAsync = async (
     {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Token " + CONFIG.REPLICATE_API_TOKEN,
+        Authorization: `Token ${CONFIG.REPLICATE_API_TOKEN}`,
       },
     }
   );
-  let generatedImage;
+  let generatedImage: string;
   while (!generatedImage) {
     // Loop in 1s intervals until the alt text is ready
-    let finalResponse = await axios.get(response.data.urls.get, {
+    const finalResponse = await axios.get(response.data.urls.get, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Token " + CONFIG.REPLICATE_API_TOKEN,
+        Authorization: `Token ${CONFIG.REPLICATE_API_TOKEN}`,
       },
     });
 
@@ -86,3 +86,4 @@ export const getImageBufferFromURLAsync = async (
     );
   }
 };
+

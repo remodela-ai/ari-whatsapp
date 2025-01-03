@@ -1,10 +1,15 @@
 import axios from "axios";
 import { CONFIG } from "src/config/config";
+
 export const sendMessageToConversationAsync = async (
   message,
   conversationId
 ) => {
-  if (!conversationId) conversationId = CONFIG.MEETCODY_CONVERSATION_ID;
+  let newConversationId = conversationId;
+
+  if (!newConversationId) {
+    newConversationId = CONFIG.MEETCODY_CONVERSATION_ID;
+  }
 
   try {
     // console.log(message);
@@ -12,17 +17,17 @@ export const sendMessageToConversationAsync = async (
       `${CONFIG.MEETCODY_URL}/messages`,
       {
         content: message,
-        conversation_id: conversationId,
+        conversation_id: newConversationId,
       },
       {
         headers: {
-          Authorization: "Bearer " + CONFIG.MEETCODY_KEY,
+          Authorization: `Bearer ${CONFIG.MEETCODY_KEY}`,
           "Content-Type": "application/json",
         },
       }
     );
-    if (response && response.data && response.data.data) {
-      return response.data.data?.content;
+    if (response?.data?.data?.content) {
+      return response.data.data.content;
     }
   } catch (error) {
     console.error("[SendMessageToConversationAsync] Error > ", error);

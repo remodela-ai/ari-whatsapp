@@ -11,7 +11,7 @@ export const codyFlow = BotWhatsapp.addKeyword(
     }
     endFlow();
   } catch (err) {
-    console.log(`[ERROR]:`, err);
+    console.log("[ERROR]:", err);
     return;
   }
 });

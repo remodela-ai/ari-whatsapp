@@ -54,6 +54,7 @@ export const menuFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.Memo
         return gotoFlow(faqFlow);
       }
       const resultText = await sendMessageToConversationAsync(ctx.body, null);
+
       if (resultText) {
         return await flowDynamic([{ body: resultText }]);
       }
