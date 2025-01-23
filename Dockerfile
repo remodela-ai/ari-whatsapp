@@ -41,4 +41,4 @@ RUN ls -la .
 RUN pnpm install --frozen-lockfile --production
 
 # Define the command to start the application using PM2 runtime
-CMD ["pm2-runtime", "start", "./dist/app.js", "--cron", "0 */12 * * *"]
+CMD ["pm2-runtime", "start", "./dist/index.js", "--cron", "0 */12 * * *"]
