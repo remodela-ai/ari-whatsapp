@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "node ./node_modules/tsx/dist/cli.cjs ./src/index.ts",
     "build": "node ./node_modules/rollup/dist/bin/rollup -c",
-    "start": "node dist/index.js"
+    "start": "./node_modules/pm2/bin/pm2-runtime start ./dist/index.js --cron '0 */12 * * *'"
   },
   "keywords": [],
   "dependencies": {
@@ -25,6 +25,7 @@
     "googleapis": "^134.0.0",
     "node-fetch": "2",
     "openai": "^4.29.1",
+    "pm2": "^5.4.3",
     "wa-sticker-formatter": "4.4.4"
   },
   "devDependencies": {

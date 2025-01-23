@@ -15,7 +15,8 @@ const main = async () => {
   const adapterDB = new BotWhatsapp.MemoryDB();
   const provider = BotWhatsapp.createProvider(BaileysProvider, {
     groupsIgnore: true,
-    readStatus: false
+    readStatus: false,
+    timeRelease: 10800000,
   });
 
   provider.server.get("/", (req, res) => {
