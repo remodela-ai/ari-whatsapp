@@ -44,13 +44,21 @@ const main = async () => {
     res.end(JSON.stringify({ status: "ok" }));
   });
 
-  const { httpServer } = await BotWhatsapp.createBot({
+  const bot = await BotWhatsapp.createBot({
     database: adapterDB,
     provider,
     flow,
   });
 
-  httpServer(+CONFIG.PORT)
+  provider.on("message", ({ body, from, name}) => {
+		console.log("Message Payload:", { body, from, name });
+  });
+
+  bot.on("send_message", ({ answer, from }) => {
+		console.log("Send Message Payload:", { answer, from });
+  });
+
+  bot.httpServer(+CONFIG.PORT)
 };
 
 main();
