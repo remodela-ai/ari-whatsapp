@@ -39,11 +39,11 @@ importers:
         specifier: ^9.7.0
         version: 9.15.0
       google-spreadsheet:
-        specifier: 4.1.4
+        specifier: ^4.1.1
         version: 4.1.4(google-auth-library@9.15.0)
       googleapis:
-        specifier: 144.0.0
-        version: 144.0.0
+        specifier: ^134.0.0
+        version: 134.0.0
       node-fetch:
         specifier: '2'
         version: 2.7.0
@@ -1401,8 +1401,8 @@ packages:
     resolution: {integrity: sha512-mgt5zsd7zj5t5QXvDanjWguMdHAcJmmDrF9RkInCecNsyV7S7YtGqm5v2IWONNID88osb7zmx5FtrAP12JfD0w==}
     engines: {node: '>=14.0.0'}
 
-  googleapis@144.0.0:
-    resolution: {integrity: sha512-ELcWOXtJxjPX4vsKMh+7V+jZvgPwYMlEhQFiu2sa9Qmt5veX8nwXPksOWGGN6Zk4xCiLygUyaz7xGtcMO+Onxw==}
+  googleapis@134.0.0:
+    resolution: {integrity: sha512-o8LhD1754W6MHWtpwAPeP1WUHgNxuMxCnLMDFlMKAA5kCMTNqX9/eaTXnkkAIv6YRfoKMQ6D1vyR6/biXuhE9g==}
     engines: {node: '>=14.0.0'}
 
   gopd@1.0.1:
@@ -1959,10 +1959,6 @@ packages:
 
   qs@6.11.0:
     resolution: {integrity: sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==}
-    engines: {node: '>=0.6'}
-
-  qs@6.12.0:
-    resolution: {integrity: sha512-trVZiI6RMOkO476zLGaBIzszOdFPnCCXHPG9kn0yuS1uz6xdVxPfZdB3vUig9pxPFDM9BRAgz/YUIVQ1/vuiUg==}
     engines: {node: '>=0.6'}
 
   qs@6.13.0:
@@ -3743,14 +3739,14 @@ snapshots:
       extend: 3.0.2
       gaxios: 6.3.0
       google-auth-library: 9.15.0
-      qs: 6.12.0
+      qs: 6.13.0
       url-template: 2.0.8
       uuid: 9.0.1
     transitivePeerDependencies:
       - encoding
       - supports-color
 
-  googleapis@144.0.0:
+  googleapis@134.0.0:
     dependencies:
       google-auth-library: 9.15.0
       googleapis-common: 7.0.1
@@ -4390,10 +4386,6 @@ snapshots:
       '@thi.ng/bitstream': 2.2.54
 
   qs@6.11.0:
-    dependencies:
-      side-channel: 1.0.6
-
-  qs@6.12.0:
     dependencies:
       side-channel: 1.0.6
 
