@@ -26,16 +26,12 @@ RUN pnpm install
 # Build the application
 RUN pnpm build
 
-RUN ls -la .
-
 # Create a new stage for deployment
 FROM builder as deploy
 
 # Copy only necessary files and directories for deployment
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/package.json /app/pnpm-lock.yaml ./
-
-RUN ls -la .
 
 # Install production dependencies using frozen lock file
 RUN pnpm install --frozen-lockfile --production
