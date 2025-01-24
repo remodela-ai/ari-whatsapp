@@ -11,6 +11,7 @@ export const helloFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.Mem
   ["hello", ...configJson.keys.hello]
 ).addAction(async (ctx, { state, gotoFlow, flowDynamic, endFlow }) => {
   try {
+    console.log("hello flow");
     await flowDynamic([
       // { body: configJson.welcome.replace("[name]", ctx.pushName) },
       {
