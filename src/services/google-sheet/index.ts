@@ -1,6 +1,6 @@
 import { google } from "googleapis";
-import { IParamsAddRow } from "./types";
-import { response } from "express";
+import type { IParamsAddRow } from "./types";
+import type { OAuth2Client } from "google-auth-library";
 
 const sheets = google.sheets("v4");
 
@@ -11,7 +11,7 @@ export async function getAuthToken() {
     scopes: SCOPES,
   });
   const authToken = await auth.getClient();
-  return authToken;
+  return authToken as OAuth2Client;
 }
 
 export async function getSpreadSheet({ spreadsheetId, auth }) {
@@ -38,7 +38,7 @@ export async function addValuesAsync({
 }: IParamsAddRow): Promise<boolean> {
   const res = await sheets.spreadsheets.values.append({
     spreadsheetId,
-    auth: auth as any,
+    auth,
     range: sheetName,
     valueInputOption: "USER_ENTERED",
     requestBody: {

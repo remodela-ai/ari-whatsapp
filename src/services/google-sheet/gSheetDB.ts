@@ -1,6 +1,7 @@
 import { CONFIG } from "src/config/config";
 import { addValuesAsync, getAuthToken, getSpreadSheetValues } from ".";
-import { IRowUser, IUser } from "./types";
+import type { IRowUser, IUser } from "./types";
+
 const ROW_ID = {
   telefono: 0,
   nombre: 1,

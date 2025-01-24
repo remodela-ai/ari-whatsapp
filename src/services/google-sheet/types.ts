@@ -1,5 +1,4 @@
-import { Compute } from "google-auth-library";
-import { JSONClient } from "google-auth-library/build/src/auth/googleauth";
+import type { OAuth2Client } from "google-auth-library";
 
 export interface IUser {
   telefono: string;
@@ -20,7 +19,7 @@ export interface IRowUser extends IUser {
 
 export interface IParamsAddRow {
   spreadsheetId: string;
-  auth: JSONClient | Compute;
+  auth: OAuth2Client;
   sheetName: string;
   values: Array<Array<string>>;
 }
