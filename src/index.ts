@@ -15,7 +15,6 @@ const main = async () => {
   const provider = BotWhatsapp.createProvider(BaileysProvider, {
     groupsIgnore: true,
     readStatus: false,
-    timeRelease: 10800000,
   });
 
   provider.server.get("/", (req, res) => {
