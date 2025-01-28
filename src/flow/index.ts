@@ -1,4 +1,4 @@
-import BotWhatsapp from "@builderbot/bot";
+import * as BotWhatsapp from "@builderbot/bot";
 import { helloFlow } from "./hello.flow";
 import { onboardingFlow } from "./onboarding.flow";
 import { remodelaFlow } from "./remodela.flow";

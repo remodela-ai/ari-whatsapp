@@ -1,6 +1,7 @@
-import BotWhatsapp from "@builderbot/bot";
+import * as BotWhatsapp from "@builderbot/bot";
 import configJson from "src/config/message.config";
 import { codyFlow } from "./cody.flow";
+
 /**
  * Un flujo conversacion que responder a las palabras claves "hola", "buenas", ...
  */
@@ -13,7 +14,7 @@ export const faqFlow = BotWhatsapp.addKeyword(
     try {
       gotoFlow(codyFlow);
     } catch (err) {
-      console.log(`[ERROR]:`, err);
+      console.log("[ERROR]:", err);
       return;
     }
   }

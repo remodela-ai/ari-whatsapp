@@ -1,18 +1,17 @@
 import "dotenv/config";
-import BotWhatsapp from "@builderbot/bot";
+import * as BotWhatsapp from "@builderbot/bot";
 import { BaileysProvider } from "@builderbot/provider-baileys";
 
 import flow from "./flow";
 import { createReadStream } from "node:fs";
 import { join } from "node:path";
 import { CONFIG } from "./config/config";
+import { adapterDB } from "./postgres";
 
 /**
  * Funcion principal del bot
  */
 const main = async () => {
-
-  const adapterDB = new BotWhatsapp.MemoryDB();
   const provider = BotWhatsapp.createProvider(BaileysProvider, {
     groupsIgnore: true,
     readStatus: false,

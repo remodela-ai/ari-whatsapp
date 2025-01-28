@@ -16,6 +16,7 @@
   "keywords": [],
   "dependencies": {
     "@builderbot/bot": "1.2.4",
+    "@builderbot/database-postgres": "^1.2.4",
     "@builderbot/provider-baileys": "1.2.4",
     "@bytescale/sdk": "3.51.0",
     "@whiskeysockets/baileys": "6.7.9",
@@ -24,6 +25,7 @@
     "dayjs": "1.11.13",
     "dotenv": "16.4.7",
     "express": "4.21.2",
+    "firebase-admin": "13.0.2",
     "google-auth-library": "9.15.0",
     "google-spreadsheet": "4.1.4",
     "googleapis": "144.0.0",

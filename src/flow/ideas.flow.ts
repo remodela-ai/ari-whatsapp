@@ -1,4 +1,4 @@
-import BotWhatsapp from "@builderbot/bot";
+import * as BotWhatsapp from "@builderbot/bot";
 import { codyFlow } from "./cody.flow";
 import type { BaileysProvider } from "@builderbot/provider-baileys";
 /**

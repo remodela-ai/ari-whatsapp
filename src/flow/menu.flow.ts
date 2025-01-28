@@ -1,12 +1,12 @@
-import BotWhatsapp from "@builderbot/bot";
+import * as BotWhatsapp from "@builderbot/bot";
 import { remodelaFlow } from "./remodela.flow";
 import configJson from "src/config/message.config";
 import { onboardingFlow } from "./onboarding.flow";
 import { ideasFlow } from "./ideas.flow";
 import { sendMessageToConversationAsync } from "src/services/meetCody";
-import { findUserByPhone } from "src/services/google-sheet/gSheetDB";
 import { faqFlow } from "./faq.flow";
 import type { BaileysProvider } from "@builderbot/provider-baileys";
+import { findUserByPhone } from "src/services/firebase";
 
 export const menuFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.MemoryDB>(
   ["menu", ...configJson.keys.menu]
@@ -17,7 +17,7 @@ export const menuFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.Memo
       if (!myState?.nombre) {
         const user = await findUserByPhone(ctx.from);
         if (user) {
-          state.update({ ...user });
+          state.update({ ...user, id: user.id });
         } else {
           return gotoFlow(onboardingFlow);
         }

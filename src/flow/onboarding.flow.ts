@@ -1,7 +1,7 @@
-import BotWhatsapp from "@builderbot/bot";
+import * as BotWhatsapp from "@builderbot/bot";
 import configJson from "src/config/message.config";
-import { addUserAsync } from "src/services/google-sheet/gSheetDB";
 import { remodelaFlow } from "./remodela.flow";
+import { addUserAsync } from "src/services/firebase";
 
 export const onboardingFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
 	.addAnswer(
@@ -62,7 +62,7 @@ export const onboardingFlow = BotWhatsapp.addKeyword(BotWhatsapp.EVENTS.ACTION)
 		try {
 			const myState = state.getMyState();
 
-			await addUserAsync({
+			await addUserAsync(ctx.from, {
 				telefono: ctx.from,
 				nombre: myState.nombre,
 				ubicacion: myState.ubicacion,

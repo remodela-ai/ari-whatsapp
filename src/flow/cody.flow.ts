@@ -1,4 +1,4 @@
-import BotWhatsapp from "@builderbot/bot";
+import * as BotWhatsapp from "@builderbot/bot";
 import { sendMessageToConversationAsync } from "src/services/meetCody";
 
 export const codyFlow = BotWhatsapp.addKeyword(

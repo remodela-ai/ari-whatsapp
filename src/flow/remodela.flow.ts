@@ -1,4 +1,4 @@
-import BotWhatsapp from "@builderbot/bot";
+import * as BotWhatsapp from "@builderbot/bot";
 import { downloadMediaMessage } from "@whiskeysockets/baileys";
 import { uploadImageAsync } from "src/services/bytescale";
 import { dayjsCustom } from "src/utils/dayjs";
@@ -7,13 +7,10 @@ import {
   remodelImageAsync,
 } from "src/services/replicate";
 import configJson from "src/config/message.config";
-import {
-  addRowRemodelaAsync,
-  findUserByPhone,
-} from "src/services/google-sheet/gSheetDB";
 import { onboardingFlow } from "./onboarding.flow";
 import { convertirANumero } from "src/utils/utils";
 import type { BaileysProvider } from "@builderbot/provider-baileys";
+import { addRowRemodelaAsync, findUserByPhone } from "src/services/firebase";
 
 export const remodelaFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.MemoryDB>(
   ["Remodela", "remodela", "remodelar", "Remodelar"],
@@ -307,7 +304,7 @@ export const remodelaFlow = BotWhatsapp.addKeyword<BaileysProvider, BotWhatsapp.
           .tz("America/Mexico_City")
           .format("YYYYMMDD_HHmmss")}.jpeg`,
       });
-      await addRowRemodelaAsync({
+      await addRowRemodelaAsync(ctx.from, {
         telefono: ctx.from,
         ambiente: myState.roomType,
         estilo: myState.roomStyle,
