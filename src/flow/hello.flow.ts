@@ -4,6 +4,7 @@ import configJson from "src/config/message.config";
 import { remodelaFlow } from "./remodela.flow";
 import type { BaileysProvider } from "@builderbot/provider-baileys";
 import { findUserByPhone } from "src/services/firebase";
+import { join } from "node:path";
 
 
 /**
@@ -19,7 +20,7 @@ export const helloFlow = BotWhatsapp.addKeyword<
 			await flowDynamic([
 				// { body: configJson.welcome.replace("[name]", ctx.pushName) },
 				{
-					media: "https://i.ibb.co/1LBXqK6/ARI1-Mesa-de-trabajo-1.png",
+					media: join(process.cwd(), "assets", "ARI1-Mesa-de-trabajo-1.png"),
 					body: configJson.welcome.replace("[name]", ctx.pushName),
 				},
 				// { body: configJson.nota }
