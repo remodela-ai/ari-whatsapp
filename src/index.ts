@@ -57,6 +57,17 @@ const main = async () => {
 		console.log("Send Message Payload:", { answer, from });
   });
 
+  provider.server.post("/message", async (req, res) => {
+    console.log("Message Received:", req.body);
+
+    const { number, message, media } = req.body
+
+    await bot.provider.sendMessage(number, message, { media }) // https://i.imgur.com/0HpzsEm.png
+
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ status: "ok" }));
+  });
+
   bot.httpServer(+CONFIG.PORT)
 };
 
