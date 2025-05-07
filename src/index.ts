@@ -6,7 +6,8 @@ import flow from "./flow";
 import { createReadStream } from "node:fs";
 import { join } from "node:path";
 import { CONFIG } from "./config/config";
-import { adapterDB } from "./postgres";
+// import { adapterDB } from "./postgres";
+import { adapterDB as adapterDBJson } from "./json";
 
 /**
  * Funcion principal del bot
@@ -43,7 +44,7 @@ const main = async () => {
   });
 
   const bot = await BotWhatsapp.createBot({
-    database: adapterDB,
+    database: adapterDBJson,
     provider,
     flow,
   });
